@@ -12,5 +12,7 @@ namespace FiorEllo.Models
         public decimal Price { get; set; }
         public int Count { get; set; }
         public bool IsDeleted { get; set; }
+        public int ProductCategoryId { get; set; }
+        public ProductCategory ProductCategory { get; set; }
     }
 }
