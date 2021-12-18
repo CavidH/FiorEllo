@@ -2,7 +2,7 @@
 
 namespace FiorEllo.Migrations
 {
-    public partial class Cippps : Migration
+    public partial class ModelsDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,7 @@ namespace FiorEllo.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false,defaultValue:false)
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,7 +57,7 @@ namespace FiorEllo.Migrations
                     Name = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(nullable: false),
                     Count = table.Column<int>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false,defaultValue:false),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
