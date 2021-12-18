@@ -7,6 +7,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20211218201925_NewsDb.cs" />
     <Compile Remove="Migrations\20211218201925_NewsDb.Designer.cs" />
+    <Compile Remove="Migrations\20211218210125_ExpertDB.cs" />
+    <Compile Remove="Migrations\20211218210125_ExpertDB.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

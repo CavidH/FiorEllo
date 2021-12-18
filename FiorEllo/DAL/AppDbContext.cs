@@ -16,7 +16,8 @@ namespace FiorEllo.DAL
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<News> News { get; set; }
+        public DbSet<Expert> Experts { get; set; }
 
-        
+
     }
 }
