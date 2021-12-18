@@ -31,7 +31,7 @@ namespace FiorEllo.Controllers
                     .Where(product=> product.IsDeleted==false)
                     .Include(product =>product.Category)
                     .Include(product => product.Image )
-                    .Take(8)
+                    .Take(8) //artiq data gelisnin qabaqini aliriq
                     .ToListAsync()
 
                 //Cards = await _context.Cards.ToListAsync(),
