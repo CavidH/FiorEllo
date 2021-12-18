@@ -33,6 +33,7 @@ namespace FiorEllo.Controllers
                     .Include(product => product.Image )
                     .Take(8)
                     .ToListAsync()
+
                 //Cards = await _context.Cards.ToListAsync(),
 
             };
