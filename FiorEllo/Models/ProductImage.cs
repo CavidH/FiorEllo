@@ -10,7 +10,7 @@ namespace FiorEllo.Models
         public string Id { get; set; }
         public string Image { get; set; }
         public bool IsMain { get; set; }
-        public Product ProductId { get; set; }
+        public int ProductId { get; set; }
         public Product Product { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace FiorEllo.Controllers
             {
                 sliderIntros = await _context.Sliders.ToListAsync(),
                 IntroTxt = await _context.Introtxt.FirstOrDefaultAsync(),
-                Cards = await _context.Cards.ToListAsync(),
+                //Cards = await _context.Cards.ToListAsync(),
 
             };
             return View(homeVm);
