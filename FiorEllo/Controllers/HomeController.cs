@@ -1,4 +1,5 @@
-﻿using FiorEllo.DAL;
+﻿using System.Linq;
+using FiorEllo.DAL;
 using FiorEllo.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,16 @@ namespace FiorEllo.Controllers
             {
                 sliderIntros = await _context.Sliders.ToListAsync(),
                 IntroTxt = await _context.Introtxt.FirstOrDefaultAsync(),
+                ProductCategories = await  _context
+                    .ProductCategories
+                    .Where(productcategory => productcategory.IsDeleted == false)
+                    .ToListAsync(),
+                Products = await _context
+                    .Products
+                    .Where(product=> product.IsDeleted==false)
+                    .Include(product =>product.Category)
+                    .Include(product => product.Image )
+                    .ToListAsync()
                 //Cards = await _context.Cards.ToListAsync(),
 
             };
