@@ -78,7 +78,7 @@ namespace FiorEllo.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Image = table.Column<string>(nullable: true),
-                    IsMain = table.Column<bool>(nullable: false),
+                    IsMain = table.Column<bool>(nullable: false, defaultValue: false),
                     ProductId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
