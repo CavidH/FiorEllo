@@ -7,6 +7,6 @@ namespace FiorEllo.ViewModel
     {
         public List<SliderIntro> sliderIntros { get; set; }
         public IntroTxt IntroTxt { get; set; }
-        public List<Card> Cards { get; set; }
+        //public List<Card> Cards { get; set; }
     }
 }

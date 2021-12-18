@@ -28,7 +28,7 @@ namespace FiorEllo.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false)
+                    IsDeleted = table.Column<bool>(nullable: false,defaultValue:false)
                 },
                 constraints: table =>
                 {
