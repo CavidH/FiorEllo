@@ -131,50 +131,21 @@
                 </div>
             </div>
             <div class="row pb-5">
+                @foreach (var expert in Model.Experts)
+                {
                 <div class="col-md-6 col-lg-3">
                     <div class="item text-center">
                         <div class="img">
-                            <img src="~/Assets/img/h3-team-img-1.png" class="img-fluid rounded-circle" alt="">
+                            <img src="~/Assets/img/@expert.Photo" class="img-fluid rounded-circle" alt="">
                         </div>
                         <div class="text mt-3">
-                            <h6>CRYSTAL BROOKS</h6>
-                            <p class="text-black-50">Florist</p>
+                            <h6>@expert.Name @expert.SurName</h6>
+                            <p class="text-black-50"> @expert.Position </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="item text-center">
-                        <div class="img">
-                            <img src="~/Assets/img/h3-team-img-2.png" class="img-fluid rounded-circle" alt="">
-                        </div>
-                        <div class="text mt-3">
-                            <h6>SHIRLEY HARRIS</h6>
-                            <p class="text-black-50">Manager</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="item text-center">
-                        <div class="img">
-                            <img src="~/Assets/img/h3-team-img-3.png" class="img-fluid rounded-circle" alt="">
-                        </div>
-                        <div class="text mt-3">
-                            <h6>BEVERLY CLARK</h6>
-                            <p class="text-black-50">Florist</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="item text-center">
-                        <div class="img">
-                            <img src="~/Assets/img/h3-team-img-4.png" class="img-fluid rounded-circle" alt="">
-                        </div>
-                        <div class="text mt-3">
-                            <h6>AMANDA WATKINS</h6>
-                            <p class="text-black-50">Florist</p>
-                        </div>
-                    </div>
-                </div>
+
+                }
                 <div class="col-lg-3"></div>
                 <div class="col-lg-3"></div>
                 <div class="col-lg-3"></div>

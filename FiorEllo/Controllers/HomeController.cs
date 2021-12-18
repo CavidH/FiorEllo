@@ -34,7 +34,8 @@ namespace FiorEllo.Controllers
                     .OrderByDescending(product => product.Id)//en yeni  productlari goturmek uchun. sondan evvele  
                     .Take(8) //artiq data gelisnin qabaqini aliriq
                     .ToListAsync(),
-               NewsAbout = await _context.News.FirstOrDefaultAsync()
+               NewsAbout = await _context.News.FirstOrDefaultAsync(),
+               Experts = await _context.Experts.ToListAsync()
 
 
                 //Cards = await _context.Cards.ToListAsync(),

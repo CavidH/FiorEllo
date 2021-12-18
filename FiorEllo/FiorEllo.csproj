@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20211218201925_NewsDb.Designer.cs" />
     <Compile Remove="Migrations\20211218210125_ExpertDB.cs" />
     <Compile Remove="Migrations\20211218210125_ExpertDB.Designer.cs" />
+    <Compile Remove="Migrations\20211218210328_expertdb.cs" />
+    <Compile Remove="Migrations\20211218210328_expertdb.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

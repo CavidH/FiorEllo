@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FiorEllo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211218210328_expertdb")]
-    partial class expertdb
+    [Migration("20211218211015_ExpertDB")]
+    partial class ExpertDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,6 +34,9 @@ namespace FiorEllo.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Position")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SurName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
