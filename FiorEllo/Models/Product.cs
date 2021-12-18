@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+
 
 namespace FiorEllo.Models
 {
@@ -12,7 +10,8 @@ namespace FiorEllo.Models
         public decimal Price { get; set; }
         public int Count { get; set; }
         public bool IsDeleted { get; set; }
-        public int ProductCategoryId { get; set; }
-        public ProductCategory ProductCategory { get; set; }
+        public int CategoryId { get; set; }
+        public ProductCategory Category { get; set; }
+        public ICollection<ProductImage> Image { get; set; }
     }
 }
