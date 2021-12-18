@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace FiorEllo.Models
 {
-    public class ProductCategory
+    public class Product
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public decimal Price { get; set; }
     }
 }
