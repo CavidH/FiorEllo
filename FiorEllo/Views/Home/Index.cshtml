@@ -42,23 +42,19 @@
                             <i class="fas fa-caret-down"></i>
                             <ul class="category list-unstyled" style="display: none;">
                                 <li><a href="" data-id="all">All</a></li>
-                                <li><a href="" data-id="popular">Popular</a></li>
-                                <li><a href="" data-id="winter">Winter</a></li>
-                                <li><a href="" data-id="various">Various</a></li>
-                                <li><a href="" data-id="exotic">Exotic</a></li>
-                                <li><a href="" data-id="green">Greens</a></li>
-                                <li><a href="" data-id="cactuse">Cactuses</a></li>
+                                @foreach (var productCategory in Model.ProductCategories)
+                                {
+                                    <li><a href="" data-id=@productCategory.Name.ToLower()>@productCategory.Name</a></li>
+                                }
                             </ul>
                         </li>
                     </ul>
                     <ul class="category d-none d-md-flex list-unstyled">
                         <li><a href="" data-id="all">All</a></li>
-                        <li><a href="" data-id="popular">Popular</a></li>
-                        <li><a href="" data-id="winter">Winter</a></li>
-                        <li><a href="" data-id="various">Various</a></li>
-                        <li><a href="" data-id="exotic">Exotic</a></li>
-                        <li><a href="" data-id="green">Greens</a></li>
-                        <li><a href="" data-id="cactuse">Cactuses</a></li>
+                        @foreach (var productCategory in Model.ProductCategories)
+                        {
+                            <li><a href="" data-id=@productCategory.Name.ToLower()>@productCategory.Name</a></li>
+                        }
                     </ul>
                     <ul class="list-unstyled">
                         <li>
@@ -70,25 +66,28 @@
             </div>
             <div class="row">
 
-                @*@foreach (var Card in Model.Cards)
+                @foreach (var product in Model.Products)
                 {
                     <div class="col-sm-6 col-md-4 col-lg-3 mt-3">
-                        <div class="product-item text-center" data-id="popular">
+                        <div class="product-item text-center" data-id="@product.Category.Name.ToLower()">
                             <div class="img">
                                 <a href="">
-                                    <img src="~/Assets/img/@Card.Img" class="img-fluid" alt="">
+                                    <img src="~/Assets/img/@foreach (var productImage in product.Image)
+                                                           { if(productImage.IsMain) 
+                                                               @productImage.Image;
+                                                           }" class="img-fluid" alt="">
                                 </a>
                             </div>
                             <div class="title mt-3">
-                                <h6>@Card.Name</h6>
+                                <h6>@product.Name</h6>
                             </div>
                             <div class="price">
                                 <span class="text-black-50">Add to cart</span>
-                                <span class="text-black-50">$@Card.Price</span>
+                                <span class="text-black-50">$@product.Price</span>
                             </div>
                         </div>
                     </div>
-                }*@
+                }
             </div>
         </div>
     </section>
