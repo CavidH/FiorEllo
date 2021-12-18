@@ -9,6 +9,7 @@ namespace FiorEllo.ViewModel
         public IntroTxt IntroTxt { get; set; }
         public List<ProductCategory> ProductCategories { get; set; }
         public List<Product> Products { get; set; }
+        public News NewsAbout { get; set; }
 
         //public List<Card> Cards { get; set; }
     }

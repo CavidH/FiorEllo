@@ -22,18 +22,20 @@ namespace FiorEllo.Controllers
             {
                 sliderIntros = await _context.Sliders.ToListAsync(),
                 IntroTxt = await _context.Introtxt.FirstOrDefaultAsync(),
-                ProductCategories = await  _context
+                ProductCategories = await _context
                     .ProductCategories
                     .Where(productcategory => productcategory.IsDeleted == false)
                     .ToListAsync(),
                 Products = await _context
                     .Products
-                    .Where(product=> product.IsDeleted==false)
-                    .Include(product =>product.Category)
-                    .Include(product => product.Image )
-                    .OrderByDescending(product=>product.Id)//en yeni  productlari goturmek uchun. sondan evvele  
+                    .Where(product => product.IsDeleted == false)
+                    .Include(product => product.Category)
+                    .Include(product => product.Image)
+                    .OrderByDescending(product => product.Id)//en yeni  productlari goturmek uchun. sondan evvele  
                     .Take(8) //artiq data gelisnin qabaqini aliriq
-                    .ToListAsync()
+                    .ToListAsync(),
+               NewsAbout = await _context.News.FirstOrDefaultAsync()
+
 
                 //Cards = await _context.Cards.ToListAsync(),
 
