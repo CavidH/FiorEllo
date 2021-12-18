@@ -2,7 +2,7 @@
 
 namespace FiorEllo.Migrations
 {
-    public partial class FlorElloDb : Migration
+    public partial class FiorDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,7 +57,7 @@ namespace FiorEllo.Migrations
                     Name = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(nullable: false),
                     Count = table.Column<int>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false,defaultValue:false),
+                    IsDeleted = table.Column<bool>(nullable: false , defaultValue: false),
                     CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -75,7 +75,8 @@ namespace FiorEllo.Migrations
                 name: "ProductImages",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Image = table.Column<string>(nullable: true),
                     IsMain = table.Column<bool>(nullable: false),
                     ProductId = table.Column<int>(nullable: false)

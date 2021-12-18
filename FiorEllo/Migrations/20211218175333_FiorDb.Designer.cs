@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FiorEllo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211218161615_FlorElloDb")]
-    partial class FlorElloDb
+    [Migration("20211218175333_FiorDb")]
+    partial class FiorDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -90,8 +90,10 @@ namespace FiorEllo.Migrations
 
             modelBuilder.Entity("FiorEllo.Models.ProductImage", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
