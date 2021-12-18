@@ -35,7 +35,8 @@ namespace FiorEllo.Controllers
                     .Take(8) //artiq data gelisnin qabaqini aliriq
                     .ToListAsync(),
                NewsAbout = await _context.News.FirstOrDefaultAsync(),
-               Experts = await _context.Experts.ToListAsync()
+               Experts = await _context.Experts.ToListAsync(),
+               Abouts = await _context.Abouts.ToListAsync()
 
 
                 //Cards = await _context.Cards.ToListAsync(),
