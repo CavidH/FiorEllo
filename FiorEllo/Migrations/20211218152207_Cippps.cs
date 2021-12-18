@@ -57,7 +57,7 @@ namespace FiorEllo.Migrations
                     Name = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(nullable: false),
                     Count = table.Column<int>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false,defaultValue:false),
                     CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
