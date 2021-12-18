@@ -31,6 +31,7 @@ namespace FiorEllo.Controllers
                     .Where(product=> product.IsDeleted==false)
                     .Include(product =>product.Category)
                     .Include(product => product.Image )
+                    .OrderByDescending(product=>product.Id)//en yeni  productlari goturmek uchun. sondan evvele  
                     .Take(8) //artiq data gelisnin qabaqini aliriq
                     .ToListAsync()
 
