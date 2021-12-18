@@ -36,10 +36,11 @@ namespace FiorEllo.Controllers
                     .ToListAsync(),
                NewsAbout = await _context.News.FirstOrDefaultAsync(),
                Experts = await _context.Experts.ToListAsync(),
-               Abouts = await _context.Abouts.ToListAsync()
+               Abouts = await _context.Abouts.ToListAsync(),
+               ExpertSlides = await _context.ExpertSlides.ToListAsync().ConfigureAwait(false)
 
 
-                //Cards = await _context.Cards.ToListAsync(),
+               //Cards = await _context.Cards.ToListAsync(),
 
             };
             return View(homeVm);

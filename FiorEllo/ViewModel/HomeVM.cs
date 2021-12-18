@@ -12,6 +12,7 @@ namespace FiorEllo.ViewModel
         public News NewsAbout { get; set; }
         public List<Expert> Experts { get; set; }
         public List<About> Abouts{ get; set; }
+        public List<ExpertSlide> ExpertSlides { get; set; }
 
         //public List<Card> Cards { get; set; }
     }

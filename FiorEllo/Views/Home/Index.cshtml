@@ -222,40 +222,26 @@
             <div class="row py-5 justify-content-center">
                 <div class="col-md-8 col-xl-6">
                     <div class="owl-carousel say">
+                        @foreach (var slide in Model.ExpertSlides)
+                        {
                         <div>
                             <div class="item text-center">
                                 <div class="img d-flex justify-content-center">
-                                    <img src="~/Assets/img/testimonial-img-1.png" alt="">
+                                    <img src="~/Assets/img/@slide.Image" alt="">
                                 </div>
                                 <div class="text text-muted pt-3 pb-5">
                                     <i>
-                                        Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus
-                                        lingua.
+                                       @slide.Head
                                     </i>
                                 </div>
                                 <div class="author">
-                                    <h6>Anna Barnes</h6>
-                                    <p class="text-black-50">Florist</p>
+                                    <h6>@slide.Name @slide.SurName</h6>
+                                    <p class="text-black-50">@slide.Position</p>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <div class="item text-center">
-                                <div class="img d-flex justify-content-center">
-                                    <img src="~/Assets/img/testimonial-img-2.png" alt="">
-                                </div>
-                                <div class="text text-muted pt-3 pb-5">
-                                    <i>
-                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                                        ligula eget.
-                                    </i>
-                                </div>
-                                <div class="author">
-                                    <h6>Jasmine White</h6>
-                                    <p class="text-black-50">Florist</p>
-                                </div>
-                            </div>
-                        </div>
+                        }
+                        
                     </div>
                 </div>
             </div>
