@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FiorEllo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211218160300_ModelsDb")]
-    partial class ModelsDb
+    [Migration("20211218161615_FlorElloDb")]
+    partial class FlorElloDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
