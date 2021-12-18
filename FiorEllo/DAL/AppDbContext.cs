@@ -11,6 +11,11 @@ namespace FiorEllo.DAL
         }
         public DbSet<SliderIntro> Sliders { get; set; }
         public DbSet<IntroTxt> Introtxt { get; set; }
-        public DbSet<Card> Cards { get; set; }
+        //public DbSet<Card> Cards { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
+
+
     }
 }
