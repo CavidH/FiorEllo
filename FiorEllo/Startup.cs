@@ -39,6 +39,7 @@ namespace FiorEllo
             }
 
             app.UseRouting();
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {
