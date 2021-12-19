@@ -47,7 +47,7 @@ namespace FiorEllo
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern:"{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    pattern:"{area:exists}/{controller=DashBoard}/{action=Index}/{id?}");
             });
 
             app.UseEndpoints(endpoints =>
