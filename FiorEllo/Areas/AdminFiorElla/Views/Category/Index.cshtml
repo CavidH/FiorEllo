@@ -35,9 +35,9 @@
                                             <td>@count</td>
                                             <td>@category.Name.ToUpper()</td>
                                             <td>
-                                                <a  asp-action="Detail"  asp-route-id="@category.Id" class="btn btn-icon waves-effect waves-light btn-primary"><i class="mdi mdi-eye-outline"></i></a>
-                                                <a  asp-action="Update" asp-route-id="@category.Id" class="btn btn-icon waves-effect waves-light btn-purple"><i class="mdi mdi-pencil-outline"></i></a> 
-                                                <a  asp-action="Delete" asp-route-id="@category.Id" class="btn btn-icon waves-effect waves-light btn-danger"><i class="mdi mdi-delete-outline"></i></a>
+                                                <a  class="btn btn-icon waves-effect waves-light btn-primary"  asp-action="Detail"  asp-route-id="@category.Id" ><i class="mdi mdi-eye-outline"></i></a>
+                                                <a class="btn btn-icon waves-effect waves-light btn-purple"     asp-action="Update" asp-route-id="@category.Id"><i class="mdi mdi-pencil-outline"></i></a> 
+                                                <a  class="btn btn-icon waves-effect waves-light btn-danger"    asp-action="Delete" asp-route-id="@category.Id"><i class="mdi mdi-delete-outline"></i></a>
                                             </td>
 
                                         </tr>

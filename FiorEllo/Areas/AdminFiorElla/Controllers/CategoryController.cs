@@ -19,5 +19,37 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         {
             return View(_context.ProductCategories);
         }
+        [Area("AdminFiorElla")]
+        public IActionResult Create()
+        {
+            return Json(new
+            {
+                Name="Create"
+            });
+        }
+        [Area("AdminFiorElla")]
+        public IActionResult Detail(int id)
+        {
+            return Json(new
+            {
+                Id=id
+            });
+        }
+        [Area("AdminFiorElla")]
+        public IActionResult Update(int id)
+        {
+            return Json(new
+            {
+                Id = id
+            });
+        }
+        [Area("AdminFiorElla")]
+        public IActionResult Delete(int id)
+        {
+            return Json(new
+            {
+                Id = id
+            });
+        }
     }
 }
