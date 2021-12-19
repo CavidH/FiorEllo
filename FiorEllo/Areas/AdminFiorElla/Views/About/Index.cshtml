@@ -1,4 +1,4 @@
-﻿ @model IEnumerable<Expert>  
+﻿ @model IEnumerable<About>  
 @{
     int count = 1;
 }
@@ -16,35 +16,35 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body table-responsive">
-                            <h4 class="m-t-0 header-title mb-4"><b>Experts Table</b></h4>
+                            <h4 class="m-t-0 header-title mb-4"><b>Abouts Table</b></h4>
                             <a class="btn btn-info waves-effect width-md waves-light " asp-action="Create" style="color:#ffffff  ">Add</a>
                             <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 
                                 <thead>
                                     <tr>
                                         <th>№</th>
-                                        <th>Name</th>
-                                        <th>Surname</th>
-                                        <th>Position</th>
+                                        <th>Title</th>
+                                        <th>Head</th>
+                                        <th>Create Date</th>
                                         <th>Photo</th>
                                         <th>Setting</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @foreach (var expert in Model)
+                                    @foreach (var about in Model)
                                     {
                                         <tr>
                                             <td>@count</td>
-                                            <td>@expert.Name</td>
-                                            <td>@expert.SurName</td>
-                                            <td>@expert.Position</td>
-                                            <td><img src="~/Assets/img/@expert.Photo" width="100" class="img-fluid" alt=""></td>
+                                            <td>@about.Title</td>
+                                            <td>@about.Head</td>
+                                            <td>@about.CreaDate</td>
+                                            <td><img src="~/Assets/img/@about.Image" width="150" class="img-fluid" alt=""></td>
                                              
                                             <td>
-                                                <a  class="btn btn-icon waves-effect waves-light btn-primary"  asp-action="Detail"  asp-route-id="@expert.Id" ><i class="mdi mdi-eye-outline"></i></a>
-                                                <a class="btn btn-icon waves-effect waves-light btn-purple"     asp-action="Update" asp-route-id="@expert.Id"><i class="mdi mdi-pencil-outline"></i></a> 
-                                                <a  class="btn btn-icon waves-effect waves-light btn-danger"    asp-action="Delete" asp-route-id="@expert.Id"><i class="mdi mdi-delete-outline"></i></a>
+                                                <a  class="btn btn-icon waves-effect waves-light btn-primary"  asp-action="Detail"  asp-route-id="@about.Id" ><i class="mdi mdi-eye-outline"></i></a>
+                                                <a class="btn btn-icon waves-effect waves-light btn-purple"     asp-action="Update" asp-route-id="@about.Id"><i class="mdi mdi-pencil-outline"></i></a> 
+                                                <a  class="btn btn-icon waves-effect waves-light btn-danger"    asp-action="Delete" asp-route-id="@about.Id"><i class="mdi mdi-delete-outline"></i></a>
                                             </td>
 
                                         </tr>
