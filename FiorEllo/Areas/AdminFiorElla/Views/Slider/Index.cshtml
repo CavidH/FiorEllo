@@ -1,7 +1,7 @@
-﻿@*@model IEnumerable<ProductCategory>
+﻿@model IEnumerable<SliderIntro>
 @{
     int count = 1;
-}*@
+}
 <!-- ============================================================== -->
 <!-- Start Page Content here -->
 <!-- ============================================================== -->
@@ -16,37 +16,34 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body table-responsive">
-                            <h4 class="m-t-0 header-title mb-4"><b>Category Table</b></h4>
+                            <h4 class="m-t-0 header-title mb-4"><b>Slider Table</b></h4>
                             <a class="btn btn-info waves-effect width-md waves-light " asp-action="Create" style="color:#ffffff  ">Add</a>
                             <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 
                                 <thead>
                                     <tr>
                                         <th>№</th>
-                                        <th>Category</th>
+                                        <th>Image</th>
                                         <th>Settings</th>
                                     </tr>
                                 </thead>
 
-                                @*<tbody>
-                                    @foreach (var category in Model)
-                                    {
-                                        <tr>
-                                            <td>@count</td>
-                                            <td>@category.Name.ToUpper()</td>
-                                            <td>
-                                                <a class="btn btn-icon waves-effect waves-light btn-primary" asp-action="Detail" asp-route-id="@category.Id"><i class="mdi mdi-eye-outline"></i></a>
-                                                <a class="btn btn-icon waves-effect waves-light btn-purple" asp-action="Update" asp-route-id="@category.Id"><i class="mdi mdi-pencil-outline"></i></a>
-                                                <a class="btn btn-icon waves-effect waves-light btn-danger" asp-action="Delete" asp-route-id="@category.Id"><i class="mdi mdi-delete-outline"></i></a>
-                                            </td>
+                                <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@item.Image</td>
+                                        <td>
+                                            <a class="btn btn-icon waves-effect waves-light btn-primary"  asp-action="Detail"  asp-route-id="@item.Id" ><i class="mdi mdi-eye-outline"></i></a>
+                                            <a class="btn btn-icon waves-effect waves-light btn-purple" asp-action="Update"  asp-route-id="@item.Id" ><i class="mdi mdi-pencil-outline"></i></a>
+                                            <a class="btn btn-icon waves-effect waves-light btn-danger" asp-action="Delete"  asp-route-id="@item.Id" ><i class="mdi mdi-delete-outline"></i></a>
+                                        </td>
 
-                                        </tr>
-
-
-                                        count++;
-
-                                    }
-                                </tbody>*@
+                                    </tr>
+                                    count++;
+                                }
+                                </tbody>
                             </table>
                         </div>
                     </div>
