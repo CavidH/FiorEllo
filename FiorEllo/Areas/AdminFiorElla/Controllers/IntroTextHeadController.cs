@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
 {
-    public class IntroTextHead : Controller
+    public class IntroTextHeadController : Controller
     {
         // GET
         private AppDbContext _context { get; }
 
-        public IntroTextHead(AppDbContext context)
+        public IntroTextHeadController(AppDbContext context)
         {
             _context = context;
         }
