@@ -29,12 +29,12 @@
                                 </thead>
 
                                 <tbody>
-                                    @foreach (var item in Model)
+                                    @foreach (var category in Model)
                                     {
                                         <tr>
                                             <td>@count</td>
-                                            <td>@item.Name.ToUpper()</td>
-                                            <td>San Francisco</td>
+                                            <td>@category.Name.ToUpper()</td>
+                                            <td><a asp-action="Detail" asp-routr-id=@category.Id>Detail</a></td>
                                         </tr>
                                         
                                         
