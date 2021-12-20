@@ -1,5 +1,15 @@
 $(document).ready(function () {
 
+    //$(document).on("click","#btn_load",
+    //    function() {
+    //        $.ajax({
+    //            url: "",
+    //            method: "GET",
+    //            success:function(result) {
+    //                $()
+    //            }
+    //        })
+    //    })
     // HEADER
 
     $(document).on('click', '#search', function () {
