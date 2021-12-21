@@ -19,6 +19,10 @@ namespace FiorEllo.ViewModel
 
         public async Task<IActionResult> Index()
         {
+            ViewBag.productscount = _context
+                .Products
+                .Where(product => product.IsDeleted == false)
+                .Count();
             var Products = await _context
                 .Products
                 .Where(product => product.IsDeleted == false)
@@ -29,18 +33,19 @@ namespace FiorEllo.ViewModel
             return View(Products);
         }
 
-        public async Task<IActionResult> LoadProduct()
+        public async Task<IActionResult> LoadProduct(int skip)
         {
+             
             var model = await _context
                 .Products
                 .OrderByDescending(product => product.Id)
-                .Skip(8)
+                .Skip(skip)
                 .Take(8)
                 .Where(product => product.IsDeleted == false)
                 .Include(product => product.Image)
                 .ToListAsync();
-            return Json(model);
-            //return PartialView("_ProductPartial", model);
+            //return Json(model);
+            return PartialView("_ProductPartial", model);
         }
     }
 }

@@ -14,14 +14,42 @@ $(document).ready(function () {
      
     //)
 
-$(document).on('click', '#btn_ld', function () {
-    $.ajax({
-                url:"Product/LoadProduct",
-                method: "GET",
-        success: function (result) {
-            console.log(result)
-                }
-            })
+    $(document).on('click', '#btn_ld', async function () {
+        let productCount = $(".products").children().length;
+        let dbProductsCount=$("#productcount").val();
+        let ProductData = await fetch(`Product/LoadProduct?skip=` + productCount)
+        let product = await ProductData.text()
+        console.log(product)
+        $(".products").append(product)
+        productCount = $(".products").children().length;
+        if (productCount==dbProductsCount){
+            $("#btn_ld").remove();     }
+
+        //  fetch('Product/LoadProduct', {
+        //     method: 'GET',
+        //     headers: {
+        //         'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        //     body: JSON.stringify(data)  
+        // });
+        
+    // $.ajax({
+    //     url: "Product/LoadProduct",
+    //     data: {
+    //        skip:productCount
+    //     },
+    //             method: "GET",
+    //
+    //             success: function (result) {
+    //                 /*console.log(result)*/
+    //                 $(".products").append(result)
+    //                 productCount = $(".products").children().length;
+    //                 if (productCount==dbProductsCount){
+    //                     $("#btn_ld").remove();
+    //                 }
+    //             }
+    //     // productcount
+    //         })
 })
 
 /*HEADER*/
