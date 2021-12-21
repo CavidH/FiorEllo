@@ -27,8 +27,10 @@ namespace FiorEllo
             {
                 options.UseSqlServer(Configuration["ConnectionStrings:Default"]);
             });
-            services.AddSession(option => { 
-            option.IdleTimeout=TimeSpan.FromSeconds(20)})
+            services.AddSession(option =>
+            {
+                option.IdleTimeout = TimeSpan.FromSeconds(20);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,8 +39,9 @@ namespace FiorEllo
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
+            }   
 
+            app.UseSession();
             app.UseRouting();
             app.UseStaticFiles();
             

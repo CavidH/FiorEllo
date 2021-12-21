@@ -4,6 +4,7 @@ using FiorEllo.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace FiorEllo.Controllers
 {
@@ -18,7 +19,7 @@ namespace FiorEllo.Controllers
 
         public async Task<IActionResult> Index()
         {
-            HttpContext.Session.Set("name","Cavid");
+            HttpContext.Session.SetString("name","Cavid");
             HomeVm homeVm = new HomeVm
             {
                 sliderIntros = await _context.Sliders.ToListAsync(),
@@ -45,6 +46,15 @@ namespace FiorEllo.Controllers
 
             };
             return View(homeVm);
+        }
+
+        public IActionResult Test()
+        {
+            var session = HttpContext.Session.GetString("name");
+            return Json(new
+            {
+                name = session
+            });
         }
 
     }
