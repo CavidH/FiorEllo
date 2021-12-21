@@ -18,6 +18,7 @@ namespace FiorEllo.Controllers
 
         public async Task<IActionResult> Index()
         {
+            HttpContext.Session.Set("name","Cavid");
             HomeVm homeVm = new HomeVm
             {
                 sliderIntros = await _context.Sliders.ToListAsync(),

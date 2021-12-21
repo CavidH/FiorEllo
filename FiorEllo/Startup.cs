@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace FiorEllo
 {
@@ -21,11 +22,13 @@ namespace FiorEllo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();// for hard refres
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration["ConnectionStrings:Default"]);
             });
+            services.AddSession(option => { 
+            option.IdleTimeout=TimeSpan.FromSeconds(20)})
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
