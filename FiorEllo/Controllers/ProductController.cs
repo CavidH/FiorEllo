@@ -29,18 +29,18 @@ namespace FiorEllo.ViewModel
             return View(Products);
         }
 
-        //public async Task<IActionResult> LoadProduct()
-        //{
-        //    var model = await _context
-        //        .Products
-        //        .OrderByDescending(product => product.Id)
-        //        .Skip(8)
-        //        .Take(8)
-        //        .Where(product => product.IsDeleted == false)
-        //        .Include(product => product.Image)
-        //        .ToListAsync(); 
-
-        //    return PartialView("_ProductPartial", model);
-        //}
+        public async Task<IActionResult> LoadProduct()
+        {
+            var model = await _context
+                .Products
+                .OrderByDescending(product => product.Id)
+                .Skip(8)
+                .Take(8)
+                .Where(product => product.IsDeleted == false)
+                .Include(product => product.Image)
+                .ToListAsync();
+            return Json(model);
+            //return PartialView("_ProductPartial", model);
+        }
     }
 }

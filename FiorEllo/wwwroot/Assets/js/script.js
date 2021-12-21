@@ -1,7 +1,8 @@
 $(document).ready(function () {
 
-    //$(document).on("click","#btn_load",
-    //    function() {
+    //$(document).on("click","#btn_ld",
+    //    function () {
+    //        alert("btn ld")
     //        $.ajax({
     //            url: "",
     //            method: "GET",
@@ -10,7 +11,20 @@ $(document).ready(function () {
     //            }
     //        })
     //    })
-    // HEADER
+     
+    //)
+
+$(document).on('click', '#btn_ld', function () {
+    $.ajax({
+                url:"Product/LoadProduct",
+                method: "GET",
+        success: function (result) {
+            console.log(result)
+                }
+            })
+})
+
+/*HEADER*/
 
     $(document).on('click', '#search', function () {
         $(this).next().toggle();
