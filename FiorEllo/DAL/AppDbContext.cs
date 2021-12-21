@@ -19,6 +19,9 @@ namespace FiorEllo.DAL
         public DbSet<Expert> Experts { get; set; }
         public DbSet<About> Abouts{ get; set; }
         public DbSet<ExpertSlide> ExpertSlides { get; set; }
+        public DbSet<SettingLoadBtn> SettingLoadBtn { get; set; }
+
+        
 
 
     }

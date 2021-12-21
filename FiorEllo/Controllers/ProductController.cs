@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FiorEllo.DAL;
 using Microsoft.EntityFrameworkCore;
+using FiorEllo.Models;
 
 namespace FiorEllo.ViewModel
 {
@@ -35,17 +36,27 @@ namespace FiorEllo.ViewModel
 
         public async Task<IActionResult> LoadProduct(int skip)
         {
-             
+            SettingLoadBtn TakeCount =await  _context.SettingLoadBtn.FirstOrDefaultAsync();
+            
+            
             var model = await _context
                 .Products
                 .OrderByDescending(product => product.Id)
                 .Skip(skip)
-                .Take(8)
+                .Take(TakeCount.ProductSkipCount)
                 .Where(product => product.IsDeleted == false)
                 .Include(product => product.Image)
                 .ToListAsync();
             //return Json(model);
             return PartialView("_ProductPartial", model);
         }
-    }
-}
+
+
+
+
+ 
+
+
+
+
+} }
