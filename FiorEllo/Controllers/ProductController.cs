@@ -38,7 +38,7 @@ namespace FiorEllo.ViewModel
         //        .Take(8)
         //        .Where(product => product.IsDeleted == false)
         //        .Include(product => product.Image)
-        //        .ToListAsync();
+        //        .ToListAsync(); 
 
         //    return PartialView("_ProductPartial", model);
         //}
