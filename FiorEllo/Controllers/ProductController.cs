@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FiorEllo.DAL;
 using Microsoft.EntityFrameworkCore;
 using FiorEllo.Models;
+using Newtonsoft.Json;
 
 namespace FiorEllo.ViewModel
 {
@@ -56,7 +57,11 @@ namespace FiorEllo.ViewModel
             if (id==null) return NotFound();
             Product dbproduct =await _context.Products.FindAsync(id);
             if (dbproduct == null) return BadRequest();
-            List<BasketVM>
+            List<BasketVM> basket;
+            if (Request.Cookies["basket"]!=null)
+            {
+                basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            }
             return Json(new{nam=id});
         }
 
