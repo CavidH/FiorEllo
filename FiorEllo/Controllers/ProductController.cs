@@ -62,7 +62,22 @@ namespace FiorEllo.ViewModel
             {
                 basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
             }
-            return Json(new{nam=id});
+            else
+            {
+                basket = new List<BasketVM>();
+            }
+            basket.Add(new BasketVM
+            {
+                Id = dbproduct.Id,
+                Count = 1
+            });
+            Response.Cookies.Append("basket",JsonConvert.SerializeObject(basket));
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Basket()
+        {
+            return Json(JsonConvert.SerializeObject(Request.Cookies["basket"]));
         }
 
 
