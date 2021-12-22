@@ -1,10 +1,12 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using FiorEllo.DAL;
 using FiorEllo.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace FiorEllo.Controllers
 {
@@ -17,6 +19,7 @@ namespace FiorEllo.Controllers
             _context = context;
         }
 
+      
         public async Task<IActionResult> Index()
         {
             HttpContext.Session.SetString("name","Cavid");
@@ -48,7 +51,7 @@ namespace FiorEllo.Controllers
             };
             return View(homeVm);
         }
-
+    
         public IActionResult Test()
         {
             var session = HttpContext.Session.GetString("name");

@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg d-flex d-lg-block justify-content-between d-xl-flex navbar-light py-3 py-lg-0">
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                             <img src="~/Assets/img/logo.png" alt="" id="logo">
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -39,7 +39,9 @@
                                     <a class="nav-link" href="#">Home</a>
                                     <ul class="list-unstyled py-3">
 
-                                        <li class=""><a class="px-1" asp-area="" asp-controller="Product">Products</a></li>
+                                        <li class=""><a class="px-1"  >Products</a></li>
+                                        <li class=""><a class="px-1"  >Products</a></li>
+                                        <li class=""><a class="px-1"  >Products</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item">
@@ -58,9 +60,7 @@
                                                 <div class="item px-4">
                                                     <h5>Product Types</h5>
                                                     <ul class="list-unstyled py-3">
-                                                        <li class=""><a class="px-3" href="">Product Types 1</a></li>
-                                                        <li class=""><a class="px-3" href="">Product Types 2</a></li>
-                                                        <li class=""><a class="px-3" href="">Product Types 3</a></li>
+                                                        <li class=""><a class="px-1" asp-area="" asp-controller="Product">Products</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -159,9 +159,9 @@
                                     <i class="fas fa-shopping-bag"></i>
                                     <sup class="rounded-circle">0</sup>
                                     <span><a asp-controller="Product" asp-action="Basket">CART ($0)</a></span>
-                                    <ul class="list-unstyled py-3">
-                                        <li class="">No products in the cart.</li>
-                                    </ul>
+                                    @* <ul class="list-unstyled py-3"> *@
+                                    @*     $1$ <li class="">No products in the cart.</li> #1# *@
+                                    @* </ul> *@
                                 </li>
                             </ul>
                         </div>
