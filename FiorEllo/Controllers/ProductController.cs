@@ -12,6 +12,7 @@ namespace FiorEllo.ViewModel
 {
     public class ProductController : Controller
     {
+        public List<BasketVM> basket;
         public AppDbContext _context { get; }
 
         public ProductController(AppDbContext context)
@@ -88,7 +89,7 @@ namespace FiorEllo.ViewModel
 
         private List<BasketVM> GetBasket()
         {
-            List<BasketVM> basket;
+            
             if (Request.Cookies["basket"]!=null)
             {
                 basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
@@ -100,10 +101,26 @@ namespace FiorEllo.ViewModel
 
             return basket;
         }
-
-        public IActionResult Basket()
+       public List<Product> BasketProducts;
+        public async Task<IActionResult> Basket()
         {
-            return View();
+            for (int i = 0; i < basket.Count; i++)
+            {
+                     BasketProducts.Add( _context
+                    .Products
+                    .Where(p => p.Id == basket[i].Id)
+                    .Include(product => product.Image)
+                    .FirstOrDefault());
+            }
+
+            BasketProductVm productVm = new BasketProductVm
+            {
+                BasketProducts = BasketProducts,
+                basket = basket
+            };
+            
+
+            return View(productVm);
             // return Json(JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]));
         }
 
