@@ -57,22 +57,21 @@ namespace FiorEllo.ViewModel
             if (id==null) return NotFound();
             Product dbproduct =await _context.Products.FindAsync(id);
             if (dbproduct == null) return BadRequest();
-            List<BasketVM> basket;
-            if (Request.Cookies["basket"]!=null)
-            {
-                basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
-            }
-            else
-            {
-                basket = new List<BasketVM>();
-            }
 
-            BasketVM BasketProduct = basket.Find(p => p.Id == dbproduct.Id);
+            List<BasketVM> basket = GetBasket();
+            UpdateBasket(basket,(int)id);
+            
+            return RedirectToAction("Index","Home");
+        }
+
+        private void UpdateBasket(List<BasketVM> basket,int Id)
+        {
+            BasketVM BasketProduct = basket.Find(p => p.Id ==Id);
             if (BasketProduct==null)
             {
                 basket.Add(new BasketVM
                 {
-                    Id = dbproduct.Id,
+                    Id =Id,
                     Count = 1
                 });
             }
@@ -83,7 +82,21 @@ namespace FiorEllo.ViewModel
             
          
             Response.Cookies.Append("basket",JsonConvert.SerializeObject(basket));
-            return RedirectToAction("Index","Home");
+        }
+
+        private List<BasketVM> GetBasket()
+        {
+            List<BasketVM> basket;
+            if (Request.Cookies["basket"]!=null)
+            {
+                basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            }
+            else
+            {
+                basket = new List<BasketVM>();
+            }
+
+            return basket;
         }
 
         public IActionResult Basket()
