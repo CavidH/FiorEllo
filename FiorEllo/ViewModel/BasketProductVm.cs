@@ -5,7 +5,12 @@ namespace FiorEllo.ViewModel
 {
     public class BasketProductVm
     {
-        public List<Product> BasketProducts;
-        public List<BasketVM> basket;
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Image { get; set; }
+        public int Count { get; set; }
+        public int StockCount { get; set; }
+        public decimal Price { get; set; }
+        
     }
 }

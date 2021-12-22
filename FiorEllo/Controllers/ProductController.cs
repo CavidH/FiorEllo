@@ -12,7 +12,7 @@ namespace FiorEllo.ViewModel
 {
     public class ProductController : Controller
     {
-        public List<BasketVM> basket;
+       
         public AppDbContext _context { get; }
 
         public ProductController(AppDbContext context)
@@ -53,10 +53,12 @@ namespace FiorEllo.ViewModel
             return PartialView("_ProductPartial", model);
         }
 
+        public List<BasketVM> basket;
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddBasket(int? id)
         {
+        
             if (id==null) return NotFound();
             Product dbproduct =await _context.Products.FindAsync(id);
             if (dbproduct == null) return BadRequest();
@@ -102,36 +104,42 @@ namespace FiorEllo.ViewModel
 
             return basket;
         }
-       public List<Product> BasketProducts;
+       
         public async Task<IActionResult> Basket()
         {
-            var baskett=  JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
-            for (int i = 1; i < baskett.Count; i++)
+            List<BasketProductVm> basketProductVms = new List<BasketProductVm>();
+
+            foreach (var item in GetBasket())
             {
-                     var d= _context
+                var product = await _context
                     .Products
-                    .Where(p => p.Id == basket[i].Id)
-                    .FirstOrDefault();
-                     BasketProducts.Add(d);
+                    .Include(p => p.Image)
+                    .FirstOrDefaultAsync(p=>p.Id==item.Id);
+                
+                basketProductVms.Add(new BasketProductVm
+                {
+                     Id = item.Id,
+                     Title = product.Name,
+                     Count = item.Count,
+                     Image = product.Image.Where(p=>p.IsMain==true).FirstOrDefault().Image,
+                     Price = product.Price,
+                     StockCount = product.Count
+                });
+
             }
+             
 
-            BasketProductVm productVm = new BasketProductVm
-            {
-                BasketProducts = BasketProducts,
-                basket = baskett
-            };
-            
-
-            return View(productVm);
+            return View(basketProductVms);
             // return Json(JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]));
         }
 
-
-
-
- 
-
-
-
+        public IActionResult RemoveBasketItem(int id)
+        {
+            var basketList = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            var product = basketList.Find(pr => pr.Id == id);
+            basketList.Remove(product);
+            Response.Cookies.Append("basket",JsonConvert.SerializeObject(basketList));
+            return RedirectToAction("Basket", "Product");
+        }
 
 } }
