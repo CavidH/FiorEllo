@@ -101,7 +101,8 @@ namespace FiorEllo.ViewModel
 
         public IActionResult Basket()
         {
-            return Json(JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]));
+            return View();
+            // return Json(JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]));
         }
 
 
