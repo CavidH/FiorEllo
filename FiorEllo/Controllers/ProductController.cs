@@ -66,18 +66,29 @@ namespace FiorEllo.ViewModel
             {
                 basket = new List<BasketVM>();
             }
-            basket.Add(new BasketVM
+
+            BasketVM BasketProduct = basket.Find(p => p.Id == dbproduct.Id);
+            if (BasketProduct==null)
             {
-                Id = dbproduct.Id,
-                Count = 1
-            });
+                basket.Add(new BasketVM
+                {
+                    Id = dbproduct.Id,
+                    Count = 1
+                });
+            }
+            else
+            {
+                BasketProduct.Count+=1;
+            }
+            
+         
             Response.Cookies.Append("basket",JsonConvert.SerializeObject(basket));
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Home");
         }
 
         public IActionResult Basket()
         {
-            return Json(JsonConvert.SerializeObject(Request.Cookies["basket"]));
+            return Json(JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]));
         }
 
 
