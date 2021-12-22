@@ -80,7 +80,7 @@
                             </div>
                             <div class="price">
                                 <form method="post" asp-controller="Product" asp-action="AddBasket" asp-route-id=@product.Id>
-                                    <button type="submit">Add to cart</button>
+                                    <button type="submit" class="btn text-black-50">Add to cart</button>
                                 </form>
                                  
                                 <span class="text-black-50">$@product.Price</span>
