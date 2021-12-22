@@ -20,6 +20,7 @@ namespace FiorEllo.Controllers
         public async Task<IActionResult> Index()
         {
             HttpContext.Session.SetString("name","Cavid");
+            Response.Cookies.Append("name","c#");
             HomeVm homeVm = new HomeVm
             {
                 sliderIntros = await _context.Sliders.ToListAsync(),
@@ -51,9 +52,11 @@ namespace FiorEllo.Controllers
         public IActionResult Test()
         {
             var session = HttpContext.Session.GetString("name");
+            var cooke = Request.Cookies["name"];
             return Json(new
             {
-                name = session
+                name = session,
+                name2 = cooke
             });
         }
 

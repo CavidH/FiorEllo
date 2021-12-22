@@ -51,6 +51,13 @@ namespace FiorEllo.ViewModel
             return PartialView("_ProductPartial", model);
         }
 
+        public async Task<IActionResult> AddBasket(int? id)
+        {
+            if (id==null) return NotFound();
+            Product product =await _context.Products.FindAsync(id);
+            return Json(new{nam=id});
+        }
+
 
 
 
