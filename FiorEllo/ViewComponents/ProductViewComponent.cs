@@ -1,7 +1,15 @@
-﻿namespace FiorEllo.ViewComponents
+﻿using FiorEllo.DAL;
+using Microsoft.AspNetCore.Mvc;
+
+namespace FiorEllo.ViewComponents
 {
-    public enum ProductViewComponent
+    public class ProductViewComponent :ViewComponent
     {
+        private AppDbContext _context;
+        public ProductViewComponent(AppDbContext context)
+        {
+            _context = context;
+        }
         
     }
 }
