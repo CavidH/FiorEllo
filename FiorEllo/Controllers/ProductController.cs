@@ -54,7 +54,9 @@ namespace FiorEllo.ViewModel
         public async Task<IActionResult> AddBasket(int? id)
         {
             if (id==null) return NotFound();
-            Product product =await _context.Products.FindAsync(id);
+            Product dbproduct =await _context.Products.FindAsync(id);
+            if (dbproduct == null) return BadRequest();
+            List<BasketVM>
             return Json(new{nam=id});
         }
 
