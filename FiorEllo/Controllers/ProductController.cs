@@ -52,6 +52,8 @@ namespace FiorEllo.ViewModel
             return PartialView("_ProductPartial", model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddBasket(int? id)
         {
             if (id==null) return NotFound();
