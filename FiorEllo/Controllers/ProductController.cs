@@ -61,10 +61,11 @@ namespace FiorEllo.ViewModel
             Product dbproduct =await _context.Products.FindAsync(id);
             if (dbproduct == null) return BadRequest();
 
-            List<BasketVM> basket = GetBasket();
+             basket = GetBasket();
             UpdateBasket(basket,(int)id);
             
             return RedirectToAction("Index","Home");
+
         }
 
         private void UpdateBasket(List<BasketVM> basket,int Id)
@@ -104,19 +105,20 @@ namespace FiorEllo.ViewModel
        public List<Product> BasketProducts;
         public async Task<IActionResult> Basket()
         {
-            for (int i = 0; i < basket.Count; i++)
+            var baskett=  JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            for (int i = 1; i < baskett.Count; i++)
             {
-                     BasketProducts.Add( _context
+                     var d= _context
                     .Products
                     .Where(p => p.Id == basket[i].Id)
-                    .Include(product => product.Image)
-                    .FirstOrDefault());
+                    .FirstOrDefault();
+                     BasketProducts.Add(d);
             }
 
             BasketProductVm productVm = new BasketProductVm
             {
                 BasketProducts = BasketProducts,
-                basket = basket
+                basket = baskett
             };
             
 
