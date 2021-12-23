@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FiorEllo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211221074411_SettigLoadBtn")]
-    partial class SettigLoadBtn
+    [Migration("20211223073330_setting")]
+    partial class setting
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -208,19 +208,22 @@ namespace FiorEllo.Migrations
                     b.ToTable("ProductImages");
                 });
 
-            modelBuilder.Entity("FiorEllo.Models.SettingLoadBtn", b =>
+            modelBuilder.Entity("FiorEllo.Models.Setting", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ProductSkipCount")
-                        .HasColumnType("int");
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("SettingLoadBtn");
+                    b.ToTable("Setting");
                 });
 
             modelBuilder.Entity("FiorEllo.Models.SliderIntro", b =>

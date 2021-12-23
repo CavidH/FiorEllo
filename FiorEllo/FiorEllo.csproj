@@ -11,6 +11,10 @@
     <Compile Remove="Migrations\20211218210125_ExpertDB.Designer.cs" />
     <Compile Remove="Migrations\20211218210328_expertdb.cs" />
     <Compile Remove="Migrations\20211218210328_expertdb.Designer.cs" />
+    <Compile Remove="Migrations\20211221074411_SettigLoadBtn.cs" />
+    <Compile Remove="Migrations\20211221074411_SettigLoadBtn.Designer.cs" />
+    <Compile Remove="Migrations\20211223071902_Setting.cs" />
+    <Compile Remove="Migrations\20211223071902_Setting.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

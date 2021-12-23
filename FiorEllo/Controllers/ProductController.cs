@@ -39,14 +39,16 @@ namespace FiorEllo.ViewModel
 
         public async Task<IActionResult> LoadProduct(int skip)
         {
-            SettingLoadBtn TakeCount =await  _context.SettingLoadBtn.FirstOrDefaultAsync();
-            
-            
+            var TakeCount = _context.Setting.Where(p => p.Key == "TakeCount").ToList().FirstOrDefault();
+            var count = Convert.ToInt32(TakeCount.Value);
+
+
+
             var model = await _context
                 .Products
                 .OrderByDescending(product => product.Id)
                 .Skip(skip)
-                .Take(TakeCount.ProductSkipCount)
+                .Take(count)
                 .Where(product => product.IsDeleted == false)
                 .Include(product => product.Image)
                 .ToListAsync();
