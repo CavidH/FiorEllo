@@ -26,14 +26,15 @@ namespace FiorEllo.ViewModel
                 .Products
                 .Where(product => product.IsDeleted == false)
                 .Count();
-            var Products = await _context
-                .Products
-                .Where(product => product.IsDeleted == false)
-                .Include(product => product.Image)
-                .OrderByDescending(product => product.Id)
-                .Take(8)
-                .ToListAsync();
-            return View(Products);
+            // var Products = await _context
+            //     .Products
+            //     .Where(product => product.IsDeleted == false)
+            //     .Include(product => product.Image)
+            //     .OrderByDescending(product => product.Id)
+            //     .Take(8)
+            //     .ToListAsync();
+            // return View(Products);
+            return View();
         }
 
         public async Task<IActionResult> LoadProduct(int skip)

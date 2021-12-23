@@ -1,8 +1,9 @@
-﻿@model List<Product>
+﻿@* @model List<Product> *@
 <section id="products">
     <div class="container">
         <div class="row products">
-            <partial name="_ProductPartial" ></partial>
+            @await Component.InvokeAsync("Product",12)@*dynamic ///////*@     
+            @* <partial name="_ProductPartial" ></partial> *@
             <input type="hidden" id="productcount" value="@ViewBag.productscount">
         </div>
         <div class="row my-5 justify-content-center ">

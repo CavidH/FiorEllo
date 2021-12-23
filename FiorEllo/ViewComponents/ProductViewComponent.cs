@@ -15,7 +15,7 @@ namespace FiorEllo.ViewComponents
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int takeCount)
         {
             var Model = await _context
                 .Products
@@ -23,7 +23,7 @@ namespace FiorEllo.ViewComponents
                 .Include(product => product.Category)
                 .Include(product => product.Image)
                 .OrderByDescending(product => product.Id) //en yeni  productlari goturmek uchun. sondan evvele  
-                .Take(8) //artiq data gelisnin qabaqini aliriq
+                .Take(takeCount) //artiq data gelisnin qabaqini aliriq
                 .ToListAsync();
             return View(await Task.FromResult(Model));
         }

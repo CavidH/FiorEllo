@@ -65,29 +65,7 @@
                 </div>
             </div>
             <div class="row">
-
-                @foreach (var product in Model.Products)
-                {
-                    <div class="col-sm-6 col-md-4 col-lg-3 mt-3">
-                        <div class="product-item text-center" data-id="@product.Category.Name.ToLower()">
-                            <div class="img">
-                                <a href="">
-                                    <img src="~/Assets/img/@product.Image.Where(image=>image.IsMain==true).FirstOrDefault().Image" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="title mt-3">
-                                <h6>@product.Name</h6>
-                            </div>
-                            <div class="price">
-                                <form method="post" asp-controller="Product" asp-action="AddBasket" asp-route-id=@product.Id>
-                                    <button type="submit" class="btn text-black-50">Add to cart</button>
-                                </form>
-                                 
-                                <span class="text-black-50">$@product.Price</span>
-                            </div>
-                        </div>
-                    </div>
-                }
+                @await Component.InvokeAsync("Product",8)  
             </div>
         </div>
     </section>
