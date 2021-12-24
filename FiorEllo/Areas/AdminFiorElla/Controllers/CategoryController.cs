@@ -1,4 +1,5 @@
 ﻿using FiorEllo.DAL;
+using FiorEllo.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
@@ -27,11 +28,11 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         [Area("AdminFiorElla")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(string name)
+        public IActionResult Create(ProductCategory productCategory)
         {
             return Json(new
             {
-                name = name
+                name = productCategory
             });
         }
         [Area("AdminFiorElla")]

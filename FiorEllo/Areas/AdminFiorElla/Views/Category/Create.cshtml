@@ -1,4 +1,5 @@
-﻿<div class="content-page">
+﻿@model ProductCategory 
+<div class="content-page">
     <div class="content">
 
         <!-- Start Content-->
@@ -23,8 +24,8 @@
 
                             <form class="parsley-examples" method="post">
                                 <div class="form-group">
-                                    <label for="userName">Category Name<span class="text-danger">*</span></label>
-                                    <input type="text" name="name" parsley-trigger="change" required placeholder="Enter Category name" class="form-control" id="categoryName">
+                                    <label asp-for="Name">Category Name<span class="text-danger">*</span></label>
+                                    <input asp-for="Name" parsley-trigger="change" required placeholder="Enter Category name" class="form-control" id="categoryName">
                                 </div>
                                 <div class="form-group text-right mb-0">
                                     <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
