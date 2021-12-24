@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using FiorEllo.DAL;
 using FiorEllo.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -29,15 +30,20 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         [Area("AdminFiorElla")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ProductCategory productCategory)
+        public async Task<IActionResult> Create(ProductCategory productCategory)
         {
-            if (!ModelState.IsValid)return View();
+            if (!ModelState.IsValid) return View();
             bool IsExits = _context.ProductCategories.Any(p => p.Name.ToLower().Trim() == productCategory.Name.ToLower().Trim());
-
-            return Json(new
+            if (IsExits)
             {
-                name = productCategory
-            });
+                ModelState.AddModelError("Name", "This category  already exits");
+                return View();
+            }
+
+            await _context.ProductCategories.AddAsync(productCategory);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
         [Area("AdminFiorElla")]
