@@ -3,9 +3,12 @@ using System.Threading.Tasks;
 using FiorEllo.DAL;
 using FiorEllo.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
 {
+    [Area("AdminFiorElla")]
+
     public class CategoryController : Controller
     {
         private AppDbContext _context { get; }
@@ -15,19 +18,16 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             _context = context;
         }
 
-        [Area("AdminFiorElla")]
         public IActionResult Index()
         {
             return View(_context.ProductCategories);
         }
 
-        [Area("AdminFiorElla")]
         public IActionResult Create()
         {
             return View();
         }
 
-        [Area("AdminFiorElla")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductCategory productCategory)
@@ -46,7 +46,6 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Area("AdminFiorElla")]
         public IActionResult Detail(int id)
         {
             return Json(new
@@ -55,17 +54,22 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             });
         }
 
-        [Area("AdminFiorElla")]
-        [HttpPost]
-        // [ValidateAntiForgeryToken]
-        public IActionResult Update(int id,string name)
+        [HttpGet]
+        public IActionResult Update()
         {
-            var c = _context.ProductCategories.Where(p => p.Id == id);
-            return Json(new
-            {
-                id=id,
-                name=name
-            });
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(int id, ProductCategory productCategory)
+        {
+            if (!ModelState.IsValid) return View();
+            var product = await _context.ProductCategories.Where(p => p.Id == id).FirstOrDefaultAsync();
+
+            product.Name = productCategory.Name;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
         // [Area("AdminFiorElla")]
         // [HttpPost]
@@ -86,7 +90,6 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         // //     return RedirectToAction(nameof(Index));
         // // }
 
-        [Area("AdminFiorElla")]
         public IActionResult Delete(int id)
         {
             return Json(new
