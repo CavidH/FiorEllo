@@ -25,6 +25,16 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             return View();
         }
         [Area("AdminFiorElla")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(string name)
+        {
+            return Json(new
+            {
+                name = name
+            });
+        }
+        [Area("AdminFiorElla")]
         public IActionResult Detail(int id)
         {
             return Json(new
