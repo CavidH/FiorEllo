@@ -1,4 +1,259 @@
 ﻿@model HomeVm
+<!-- MAIN END --> 
+
+<!-- MAIN START -->
+
+<main>
+
+    <!-- SLIDER START -->
+
+    <section id="slider">
+        <div class="owl-carousel slider">
+            @foreach (var sliderImg in Model.sliderIntros)
+            {
+                <div> <img src="~/Assets/img/@sliderImg.Image" alt=""> </div>
+
+            }
+
+        </div>
+        <div class="container context pl-lg-5 ml-lg-3">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="text">
+                        @Html.Raw(Model.IntroTxt.Head)
+                        <p class="text-black-50 d-none d-sm-block">@Model.IntroTxt.Content.</p>
+                    </div>
+                    <div class="img">
+                        <img src="~/Assets/img/@Model.IntroTxt.Logo" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDER END -->
+    <!-- PRODUCTS START -->
+
+    <section id="products">
+        <div class="container">
+            <div class="row pt-5">
+                <div class="col-12 d-flex justify-content-between">
+                    <ul class="category-mobile d-md-none list-unstyled">
+                        <li>
+                            <a href="" class="categories mr-2">Categories</a>
+                            <i class="fas fa-caret-down"></i>
+                            <ul class="category list-unstyled" style="display: none;">
+                                <li><a href="" data-id="all">All</a></li>
+                                @foreach (var productCategory in Model.ProductCategories)
+                                {
+                                    <li><a href="" data-id=@productCategory.Name.ToLower()>@productCategory.Name</a></li>
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="category d-none d-md-flex list-unstyled">
+                        <li><a href="" data-id="all">All</a></li>
+                        @foreach (var productCategory in Model.ProductCategories)
+                        {
+                            <li><a href="" data-id=@productCategory.Name.ToLower()>@productCategory.Name</a></li>
+                        }
+                    </ul>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="" class="mr-2">Filter</a>
+                            <i class="fas fa-caret-down"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                @await Component.InvokeAsync("Product",8)  
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS END -->
+    <!-- ABOUT START -->
+ 
+    <section id="about">
+        <div class="container py-5">
+            <div class="row py-5">
+                <div class="col-lg-6">
+                    <div class="img">
+                        <img src="~/Assets/img/@Model.NewsAbout.Cover" class="img-fluid" alt="">
+                        <div class="player position-absolute rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="fas fa-play fa-lg"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-text mt-5 mt-lg-0 px-lg-5">
+                        @Html.Raw(@Model.NewsAbout.Title)
+                        @Html.Raw(@Model.NewsAbout.Content)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT END -->
+    <!-- EXPERTS START -->
+
+    <section id="experts">
+        <div class="container">
+            <div class="row py-5">
+                <div class="offset-lg-3 col-lg-6">
+                    <div class="section-title">
+                        <h1>Flower Experts</h1>
+                        <p class="text-black-50">
+                            A perfect blend of creativity, energy, communication, happiness and
+                            love. Let us arrange
+                            a smile for you.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row pb-5">
+                @foreach (var expert in Model.Experts)
+                {
+                <div class="col-md-6 col-lg-3">
+                    <div class="item text-center">
+                        <div class="img">
+                            <img src="~/Assets/img/@expert.Photo" class="img-fluid rounded-circle" alt="">
+                        </div>
+                        <div class="text mt-3">
+                            <h6>@expert.Name @expert.SurName</h6>
+                            <p class="text-black-50"> @expert.Position </p>
+                        </div>
+                    </div>
+                </div>
+
+                }
+                <div class="col-lg-3"></div>
+                <div class="col-lg-3"></div>
+                <div class="col-lg-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERTS END -->
+    <!-- SUBSCRIBE START -->
+
+    <section id="subscribe">
+        <div class="container py-5">
+            <div class="row py-5">
+                <div class="col-12">
+                    <div class="content text-center py-5">
+                        <h3>Join The Colorful Bunch!</h3>
+                        <div class="form-group d-flex justify-content-center flex-wrap mt-5">
+                            <input type="email" placeholder="Email Address" class="form-control-lg rounded-0">
+                            <button class="btn btn-danger btn-lg rounded-0 px-5 mt-3 mt-sm-0">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUBSCRIBE END -->
+    <!-- BLOG START -->
+
+    <section id="blog">
+        <div class="container">
+            <div class="row py-5">
+                <div class="offset-lg-3 col-lg-6">
+                    <div class="section-title">
+                        <h1>From our Blog</h1>
+                        <p class="text-black-50">
+                            A perfect blend of creativity, energy, communication, happiness and
+                            love. Let us arrange
+                            a smile for you.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row pb-5">
+                 @foreach (var about in Model.Abouts)
+                 {
+                     <div class="col-md-6 col-lg-4">
+                         <div class="item">
+                             <div class="img position-relative">
+                                 <img src="~/Assets/img/@about.Image" class="img-fluid" alt="">
+                                 <div class="date rounded bg-light position-absolute py-1 px-2">
+                                     <span>@about.CreaDate.Day.@about.CreaDate.Month.@about.CreaDate.Year</span>
+                                 </div>
+                             </div>
+                             <div class="text mt-3 text-center px-5">
+                                 <h5>@about.Title</h5>
+                                 <p class="text-black-50">
+                                    @about.Head
+                                 </p>
+                             </div>
+                         </div>
+                     </div>
+
+                 }
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOG END -->
+    <!-- SAY START -->
+
+    <section id="say">
+        <div class="container">
+            <div class="row py-5 justify-content-center">
+                <div class="col-md-8 col-xl-6">
+                    <div class="owl-carousel say">
+                        @foreach (var slide in Model.ExpertSlides)
+                        {
+                        <div>
+                            <div class="item text-center">
+                                <div class="img d-flex justify-content-center">
+                                    <img src="~/Assets/img/@slide.Image" alt="">
+                                </div>
+                                <div class="text text-muted pt-3 pb-5">
+                                    <i>
+                                       @slide.Head
+                                    </i>
+                                </div>
+                                <div class="author">
+                                    <h6>@slide.Name @slide.SurName</h6>
+                                    <p class="text-black-50">@slide.Position</p>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SAY END -->
+    <!-- INSTAGRAM START -->
+
+    <section id="instagram">
+        <div class="owl-carousel instagram">
+            <div><img src="~/Assets/img/instagram1.jpg" class="img-fluid" alt=""></div>
+            <div><img src="~/Assets/img/instagram2.jpg" class="img-fluid" alt=""></div>
+            <div><img src="~/Assets/img/instagram3.jpg" class="img-fluid" alt=""></div>
+            <div><img src="~/Assets/img/instagram4.jpg" class="img-fluid" alt=""></div>
+            <div><img src="~/Assets/img/instagram5.jpg" class="img-fluid" alt=""></div>
+            <div><img src="~/Assets/img/instagram6.jpg" class="img-fluid" alt=""></div>
+            <div><img src="~/Assets/img/instagram7.jpg" class="img-fluid" alt=""></div>
+            <div><img src="~/Assets/img/instagram8.jpg" class="img-fluid" alt=""></div>
+        </div>
+        <div class="hastag bg-light text-muted py-2 px-3">
+            #FIORELLO
+        </div>
+    </section>
+
+    <!-- INSTAGRAM END -->
+
+</main>
+
 <!-- MAIN START -->
 
 <main>

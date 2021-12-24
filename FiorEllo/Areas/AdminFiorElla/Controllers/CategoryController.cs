@@ -22,10 +22,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         [Area("AdminFiorElla")]
         public IActionResult Create()
         {
-            return Json(new
-            {
-                Name="Create"
-            });
+            return View();
         }
         [Area("AdminFiorElla")]
         public IActionResult Detail(int id)

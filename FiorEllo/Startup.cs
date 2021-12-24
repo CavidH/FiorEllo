@@ -16,21 +16,19 @@ namespace FiorEllo
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
         }
+
         public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();// for hard refres
+            services.AddControllersWithViews().AddRazorRuntimeCompilation(); // for hard refres
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration["ConnectionStrings:Default"]);
             });
-            services.AddSession(option =>
-            {
-                option.IdleTimeout = TimeSpan.FromSeconds(20);
-            });
+            services.AddSession(option => { option.IdleTimeout = TimeSpan.FromSeconds(20); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,23 +37,19 @@ namespace FiorEllo
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }   
+            }
 
             app.UseSession();
             app.UseRouting();
             app.UseStaticFiles();
-            
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern:"{area:exists}/{controller=DashBoard}/{action=Index}/{id?}");
-            });
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name:"default",
+                    name: "default",
+                    pattern: "{area:exists}/{controller=DashBoard}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
