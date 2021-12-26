@@ -36,7 +36,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             newsDb.Title = news.Title;
             newsDb.Content = news.Content;
             newsDb.Cover = news.Cover;
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(); 
             
             return RedirectToAction(nameof(Index));
         }
