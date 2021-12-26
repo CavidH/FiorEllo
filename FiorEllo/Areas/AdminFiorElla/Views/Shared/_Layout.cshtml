@@ -31,33 +31,33 @@
 <!-- Topbar Start -->
 <div class="navbar-custom">
 <ul class="list-unstyled topnav-menu float-right mb-0">
-
-<li class="dropdown d-none d-lg-block">
-    <a class="nav-link dropdown-toggle mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-        <img src="~/Admin/assets/images/flags/us.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">English <i class="mdi mdi-chevron-down"></i> </span>
-    </a>
-    <div class="dropdown-menu dropdown-menu-right">
-        <!-- item-->
-        <a href="javascript:void(0);" class="dropdown-item notify-item">
-            <img src="~/Admin/assets/images/flags/germany.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">German</span>
-        </a>
-
-        <!-- item-->
-        <a href="javascript:void(0);" class="dropdown-item notify-item">
-            <img src="~/Admin/assets/images/flags/italy.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Italian</span>
-        </a>
-
-        <!-- item-->
-        <a href="javascript:void(0);" class="dropdown-item notify-item">
-            <img src="~/Admin/assets/images/flags/spain.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Spanish</span>
-        </a>
-
-        <!-- item-->
-        <a href="javascript:void(0);" class="dropdown-item notify-item">
-            <img src="~/Admin/assets/images/flags/russia.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Russian</span>
-        </a>
-    </div>
-</li>
+@* Language Bar *@
+@* <li class="dropdown d-none d-lg-block"> *@
+@*     <a class="nav-link dropdown-toggle mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"> *@
+@*         <img src="~/Admin/assets/images/flags/us.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">English <i class="mdi mdi-chevron-down"></i> </span> *@
+@*     </a> *@
+@*     <div class="dropdown-menu dropdown-menu-right"> *@
+@*         <!-- item--> *@
+@*         <a href="javascript:void(0);" class="dropdown-item notify-item"> *@
+@*             <img src="~/Admin/assets/images/flags/germany.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">German</span> *@
+@*         </a> *@
+@* *@
+@*         <!-- item--> *@
+@*         <a href="javascript:void(0);" class="dropdown-item notify-item"> *@
+@*             <img src="~/Admin/assets/images/flags/italy.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Italian</span> *@
+@*         </a> *@
+@* *@
+@*         <!-- item--> *@
+@*         <a href="javascript:void(0);" class="dropdown-item notify-item"> *@
+@*             <img src="~/Admin/assets/images/flags/spain.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Spanish</span> *@
+@*         </a> *@
+@* *@
+@*         <!-- item--> *@
+@*         <a href="javascript:void(0);" class="dropdown-item notify-item"> *@
+@*             <img src="~/Admin/assets/images/flags/russia.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Russian</span> *@
+@*         </a> *@
+@*     </div> *@
+@* </li> *@
 
 <li class="dropdown notification-list">
     <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -289,10 +289,10 @@
     <a asp-controller="DashBoard" asp-action="Index" class="logo text-center logo-dark">
         <span class="logo-lg">
             @* <img src="~/Admin/assets/images/logo-dark.png" alt="" height="18"> *@
-             <span class="logo-lg-text-light">FiorElla</span> 
+            <span class="logo-lg-text-light">FiorElla</span>
         </span>
         <span class="logo-sm">
-            <span class="logo-lg-text-light">FiorElla</span> 
+            <span class="logo-lg-text-light">FiorElla</span>
             @* <img src="~/Admin/assets/images/logo-sm.png" alt="" height="22"> *@
         </span>
     </a>
@@ -300,10 +300,10 @@
     <a asp-controller="DashBoard" asp-action="Index" class="logo text-center logo-light">
         <span class="logo-lg">
             @* <img src="~/Admin/assets/images/logo-light.png" alt="" height="18"> *@
-             <span class="logo-lg-text-light">FiorElla</span> 
+            <span class="logo-lg-text-light">FiorElla</span>
         </span>
         <span class="logo-sm">
-           <span class="logo-lg-text-light">FiorElla</span>  
+            <span class="logo-lg-text-light">FiorElla</span>
             @* <img src="~/Admin/assets/images/logo-sm.png" alt="" height="22"> *@
         </span>
     </a>
@@ -313,11 +313,12 @@
 
 
 <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
-    <li> <button class="button-menu-mobile waves-effect">
-                        <i class="mdi mdi-menu"></i>
-                    </button>
-                 </li>
-  
+    <li>
+        <button class="button-menu-mobile waves-effect">
+            <i class="mdi mdi-menu"></i>
+        </button>
+    </li>
+
 
     <li class="d-none d-lg-block">
         <form class="app-search">
@@ -346,48 +347,90 @@
 
 <li class="menu-title">Navigation</li>
 
+@* <li> *@
+@*     <a href="javascript: void(0);" class="waves-effect"> *@
+@*         <i class=" mdi mdi-content-save-settings-outline"></i> *@
+@*         <span  class="text-light" > Site Content </span> *@
+@*     </a> *@
+@*     <ul class="nav-second-level" aria-expanded="false"> *@
+@*         <li> *@
+@*             <a  class="text-light" asp-area="AdminFiorElla" asp-controller="Category" asp-action="Index">Category </a> *@
+@*         </li> *@
+@* *@
+@*     </ul> *@
+@*     <ul class="nav-second-level" aria-expanded="false"> *@
+@*         <li> *@
+@*             <a asp-area="AdminFiorElla" asp-controller="Product" asp-action="Index">Product </a> *@
+@*         </li> *@
+@*     </ul> *@
+@*     <ul class="nav-second-level" aria-expanded="false"> *@
+@*         <li> *@
+@*             <a asp-area="AdminFiorElla" asp-controller="Slider" asp-action="Index">Slider </a> *@
+@*         </li> *@
+@* *@
+@*     </ul> *@
+@*     <ul class="nav-second-level" aria-expanded="false"> *@
+@*         <li> *@
+@*             <a asp-area="AdminFiorElla" asp-controller="IntroTextHead" asp-action="Index">Intro Text </a> *@
+@*         </li> *@
+@*     </ul> *@
+@*     <ul class="nav-second-level" aria-expanded="false"> *@
+@*         <li> *@
+@*             <a asp-area="AdminFiorElla" asp-controller="News" asp-action="Index">News </a> *@
+@*         </li> *@
+@*     </ul> *@
+@*     <ul class="nav-second-level" aria-expanded="false"> *@
+@*     <li> *@
+@*         <a asp-area="AdminFiorElla" asp-controller="Expert" asp-action="Index">Experts </a> *@
+@*     </li> *@
+@*     </ul> *@
+@*     <ul class="nav-second-level" aria-expanded="false"> *@
+@*             <li> *@
+@*                 <a asp-area="AdminFiorElla" asp-controller="About" asp-action="Index">About </a> *@
+@*             </li>     *@
+@*     </ul> *@
+@* </li> *@
 <li>
-    <a href="javascript: void(0);" class="waves-effect">
-        <i class=" mdi mdi-content-save-settings-outline"></i>
-        <span  class="text-light" > Site Content </span>
+    <a asp-area="AdminFiorElla" asp-controller="Category" asp-action="Index" class="waves-effect">
+        <i class=" ion ion-md-folder-open"></i>
+        <span class="text-light"> Category </span>
     </a>
-    <ul class="nav-second-level" aria-expanded="false">
-        <li>
-            <a  class="text-light" asp-area="AdminFiorElla" asp-controller="Category" asp-action="Index">Category </a>
-        </li>
-
-    </ul>
-    <ul class="nav-second-level" aria-expanded="false">
-        <li>
-            <a asp-area="AdminFiorElla" asp-controller="Product" asp-action="Index">Product </a>
-        </li>
-    </ul>
-    <ul class="nav-second-level" aria-expanded="false">
-        <li>
-            <a asp-area="AdminFiorElla" asp-controller="Slider" asp-action="Index">Slider </a>
-        </li>
-
-    </ul>
-    <ul class="nav-second-level" aria-expanded="false">
-        <li>
-            <a asp-area="AdminFiorElla" asp-controller="IntroTextHead" asp-action="Index">Intro Text </a>
-        </li>
-    </ul>
-    <ul class="nav-second-level" aria-expanded="false">
-        <li>
-            <a asp-area="AdminFiorElla" asp-controller="News" asp-action="Index">News </a>
-        </li>
-    </ul>
-    <ul class="nav-second-level" aria-expanded="false">
-    <li>
-        <a asp-area="AdminFiorElla" asp-controller="Expert" asp-action="Index">Experts </a>
-    </li>
-    </ul>
-    <ul class="nav-second-level" aria-expanded="false">
-            <li>
-                <a asp-area="AdminFiorElla" asp-controller="About" asp-action="Index">About </a>
-            </li>    
-    </ul>
+</li>
+<li>
+    <a asp-area="AdminFiorElla" asp-controller="Product" asp-action="Index" class="waves-effect">
+        <i class=" ion ion-md-basket"></i>
+        <span class="text-light"> Product </span>
+    </a>
+</li>
+<li>
+    <a asp-area="AdminFiorElla" asp-controller="Slider" asp-action="Index" class="waves-effect">
+        <i class=" ion ion-md-photos"></i>
+        <span class="text-light"> Slider </span>
+    </a>
+</li>
+<li>
+    <a asp-area="AdminFiorElla" asp-controller="IntroTextHead" asp-action="Index" class="waves-effect">
+        <i class=" ion ion-md-text"></i>
+        <span class="text-light"> Intro Text </span>
+    </a>
+</li>
+<li>
+    <a asp-area="AdminFiorElla" asp-controller="News" asp-action="Index" class="waves-effect">
+        <i class=" ion ion-md-paper"></i>
+        <span class="text-light"> News </span>
+    </a>
+</li>
+<li>
+    <a asp-area="AdminFiorElla" asp-controller="Expert" asp-action="Index" class="waves-effect">
+        <i class=" ion ion-md-people"></i>
+        <span class="text-light"> Experts </span>
+    </a>
+</li>
+<li>
+    <a asp-area="AdminFiorElla" asp-controller="About" asp-action="Index" class="waves-effect">
+        <i class=" ion ion-md-information-circle-outline"></i>
+        <span class="text-light"> About </span>
+    </a>
 </li>
 
 
