@@ -66,6 +66,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         {
             //input uchun def calue
             var category = await _context.ProductCategories.FindAsync(id);
+            if (category==null)  return NotFound();
             
             return View(category);
         }
@@ -74,9 +75,11 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int id, ProductCategory productCategory)
         {
+                
             if (!ModelState.IsValid) return View();
-            var category = await _context.ProductCategories.Where(p => p.Id == id).FirstOrDefaultAsync();
-
+            var category = await _context.ProductCategories.FindAsync(id);
+            
+            
             category.Name = productCategory.Name;
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

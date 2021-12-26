@@ -74,12 +74,12 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             });
         }
         [Area("AdminFiorElla")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return Json(new
-            {
-                Id = id
-            });
+            var product=await _context.Products.FindAsync(id);
+            product.IsDeleted = true;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
