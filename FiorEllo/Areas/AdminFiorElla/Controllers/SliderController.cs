@@ -1,9 +1,11 @@
 ﻿using System.Threading.Tasks;
 using FiorEllo.DAL;
-using Microsoft.AspNetCore.Mvc; 
+using FiorEllo.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
 {
+    [Area("AdminFiorElla")]
     public class SliderController : Controller
     {
         private AppDbContext _context { get; }
@@ -12,22 +14,27 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         {
             _context = context;
         }
-        [Area("AdminFiorElla")]
+
         public IActionResult Index()
         {
-            
-
             return View(_context.Sliders);
         }
-        [Area("AdminFiorElla")]
+
+        [HttpGet]
         public IActionResult Create()
         {
-            return Json(new
-            {
-                Name = "Create"
-            });
+            return View();
         }
-        [Area("AdminFiorElla")]
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(SliderIntro slide)
+        {
+            await _context.Sliders.AddAsync(slide);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
         public IActionResult Detail(int id)
         {
             return Json(new
@@ -35,7 +42,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
                 Id = id
             });
         }
-        [Area("AdminFiorElla")]
+
         public IActionResult Update(int id)
         {
             return Json(new
@@ -43,7 +50,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
                 Id = id
             });
         }
-        [Area("AdminFiorElla")]
+
         public async Task<IActionResult> Delete(int id)
         {
             var slide = await _context.Sliders.FindAsync(id);
