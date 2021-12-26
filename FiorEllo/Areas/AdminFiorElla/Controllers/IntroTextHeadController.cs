@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using FiorEllo.DAL;
+using FiorEllo.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
 {
@@ -17,16 +19,27 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var intro=await _context.Introtxt.FirstAsync();
-            return View(intro);
+            return View(await getIntro());
         }
         
-        public IActionResult Update(int id)
+        public  async Task<IActionResult> Update()
         {
-            return Json(new
-            {
-                Id = id
-            });
+            return View(await getIntro());
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public  async Task<IActionResult> Update(IntroTxt introTxt)
+        {
+            var intro = await getIntro();
+            intro.Content = introTxt.Content;
+            intro.Head = introTxt.Head;
+            intro.Logo = introTxt.Logo;
+            await  _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        private  async Task<IntroTxt> getIntro()
+        {
+             return await _context.Introtxt.FirstAsync();
         }
          
     }

@@ -1,8 +1,13 @@
-﻿using FiorEllo.DAL;
+﻿using System.Threading.Tasks;
+using FiorEllo.DAL;
+using FiorEllo.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
 {
+    [Area("AdminFiorElla")]
+
     public class NewsController : Controller
     {
         // GET
@@ -13,43 +18,32 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             _context = context;
         }
 
-        [Area("AdminFiorElla")]
-
-        public IActionResult Index()
+        public async Task<IActionResult>  Index()
         {
-            return View(_context.News);
+            var news =  await getNews();
+            return View(news);
         }
-        [Area("AdminFiorElla")]
-        public IActionResult Create()
+        public async Task<IActionResult> Update()
         {
-            return Json(new
-            {
-                Name="Create"
-            });
+            var newsDb =  await getNews();
+            return View(newsDb);
         }
-        [Area("AdminFiorElla")]
-        public IActionResult Detail(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(News news)
         {
-            return Json(new
-            {
-                Id=id
-            });
+            var newsDb =  await getNews();
+            newsDb.Title = news.Title;
+            newsDb.Content = news.Content;
+            newsDb.Cover = news.Cover;
+            await _context.SaveChangesAsync();
+            
+            return RedirectToAction(nameof(Index));
         }
-        [Area("AdminFiorElla")]
-        public IActionResult Update(int id)
+        private  async Task<News> getNews()
         {
-            return Json(new
-            {
-                Id = id
-            });
+            return await _context.News.FirstAsync();
         }
-        [Area("AdminFiorElla")]
-        public IActionResult Delete(int id)
-        {
-            return Json(new
-            {
-                Id = id
-            });
-        }
+        
     }
 }
