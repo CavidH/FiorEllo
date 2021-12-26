@@ -43,12 +43,20 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             });
         }
 
-        public IActionResult Update(int id)
+        public async Task<IActionResult> Update(int id)
         {
-            return Json(new
-            {
-                Id = id
-            });
+            var slide = await _context.Sliders.FindAsync(id);
+            return View(slide);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(int id, SliderIntro slider)
+        {
+            var slide = await _context.Sliders.FindAsync(id);
+            slide.Image = slider.Image;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Delete(int id)
