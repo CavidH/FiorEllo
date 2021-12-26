@@ -57,6 +57,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
+            //input uchun def calue
             var category = await _context.ProductCategories.FindAsync(id);
             
             return View(category);
