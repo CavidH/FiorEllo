@@ -1,4 +1,5 @@
-﻿using FiorEllo.DAL;
+﻿using System.Threading.Tasks;
+using FiorEllo.DAL;
 using Microsoft.AspNetCore.Mvc; 
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
@@ -43,6 +44,12 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             });
         }
         [Area("AdminFiorElla")]
-        
+        public async Task<IActionResult> Delete(int id)
+        {
+            var slide = await _context.Sliders.FindAsync(id);
+            _context.Remove(slide);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
