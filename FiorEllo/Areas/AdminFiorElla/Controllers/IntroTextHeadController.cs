@@ -20,20 +20,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             var intro=await _context.Introtxt.FirstAsync();
             return View(intro);
         }
-        // public IActionResult Create()
-        // {
-        //     return Json(new
-        //     {
-        //         Name = "Create"
-        //     });
-        // }
-        public IActionResult Detail(int id)
-        {
-            return Json(new
-            {
-                Id = id
-            });
-        }
+        
         public IActionResult Update(int id)
         {
             return Json(new
@@ -41,12 +28,6 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
                 Id = id
             });
         }
-        public IActionResult Delete(int id)
-        {
-            return Json(new
-            {
-                Id = id
-            });
-        }
+         
     }
 }
