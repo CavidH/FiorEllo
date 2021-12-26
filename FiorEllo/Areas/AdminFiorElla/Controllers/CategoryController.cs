@@ -55,9 +55,11 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         }
 
         [HttpGet]
-        public IActionResult Update()
+        public async Task<IActionResult> Update(int id)
         {
-            return View();
+            var category = await _context.ProductCategories.FindAsync(id);
+            
+            return View(category);
         }
 
         [HttpPost]
@@ -65,9 +67,9 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         public async Task<IActionResult> Update(int id, ProductCategory productCategory)
         {
             if (!ModelState.IsValid) return View();
-            var product = await _context.ProductCategories.Where(p => p.Id == id).FirstOrDefaultAsync();
+            var category = await _context.ProductCategories.Where(p => p.Id == id).FirstOrDefaultAsync();
 
-            product.Name = productCategory.Name;
+            category.Name = productCategory.Name;
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
