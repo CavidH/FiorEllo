@@ -20,13 +20,11 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
 
         public async Task<IActionResult>  Index()
         {
-            var news =  await getNews();
-            return View(news);
+            return View(await getNews());
         }
         public async Task<IActionResult> Update()
         {
-            var newsDb =  await getNews();
-            return View(newsDb);
+            return View(await getNews());
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

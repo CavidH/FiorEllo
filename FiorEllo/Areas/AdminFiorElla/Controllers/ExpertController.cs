@@ -1,8 +1,11 @@
-﻿using FiorEllo.DAL;
+﻿using System.Threading.Tasks;
+using FiorEllo.DAL;
+using FiorEllo.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
 {
+    [Area("AdminFiorElla")]
     public class ExpertController : Controller
     {
         // GET
@@ -13,43 +16,61 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             _context = context;
         }
 
-        [Area("AdminFiorElla")]
 
         public IActionResult Index()
         {
             return View(_context.Experts);
         }
-        [Area("AdminFiorElla")]
+
         public IActionResult Create()
         {
-            return Json(new
-            {
-                Name="Create"
-            });
+            return View();
         }
-        [Area("AdminFiorElla")]
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Expert expert)
+        {
+            await _context.Experts.AddAsync(expert);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
         public IActionResult Detail(int id)
         {
             return Json(new
             {
-                Id=id
-            });
-        }
-        [Area("AdminFiorElla")]
-        public IActionResult Update(int id)
-        {
-            return Json(new
-            {
                 Id = id
             });
         }
-        [Area("AdminFiorElla")]
-        public IActionResult Delete(int id)
+
+        public async Task<IActionResult>  Update(int id)
         {
-            return Json(new
-            {
-                Id = id
-            });
+            return View(await GetExpertById(id));
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult>  Update(int id,Expert expert)
+        {
+            var Expert = await GetExpertById(id);
+            Expert.Name = expert.Name;
+            Expert.SurName = expert.SurName;
+            Expert.Position = expert.Position;
+            Expert.Photo = expert.Photo;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            _context.Remove(await GetExpertById(id));
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private async Task<Expert> GetExpertById(int id)
+        {
+            return await _context.Experts.FindAsync(id);
         }
     }
 }
