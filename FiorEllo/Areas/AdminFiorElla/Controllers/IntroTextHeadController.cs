@@ -1,5 +1,7 @@
-﻿using FiorEllo.DAL;
+﻿using System.Threading.Tasks;
+using FiorEllo.DAL;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
 {
@@ -13,9 +15,10 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             _context = context;
         }
         [Area("AdminFiorElla")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_context.Introtxt);
+            var intro=await _context.Introtxt.FirstAsync();
+            return View(intro);
         }
         [Area("AdminFiorElla")]
         public IActionResult Create()
