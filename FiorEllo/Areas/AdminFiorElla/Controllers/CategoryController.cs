@@ -20,7 +20,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
 
         public IActionResult Index()
         {
-            return View(_context.ProductCategories);
+            return View(_context.ProductCategories.Where(p=>p.IsDeleted==false));
         }
 
         public IActionResult Create()
@@ -46,12 +46,19 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Detail(int id)
+        public async Task<IActionResult> Detail(int id)
         {
-            return Json(new
-            {
-                Id = id
-            });
+           var category = await _context
+                .ProductCategories
+                .Include(p => p.Products)
+                .Include(p=>p.Products)
+                .Where(p => p.Id == id)
+                .FirstOrDefaultAsync();
+           // return Json(new
+           // {
+           //     name=category.Name
+           // });
+            return View(category);
         }
 
         [HttpGet]
@@ -74,31 +81,12 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        // [Area("AdminFiorElla")]
-        // [HttpPost]
-        // [ValidateAntiForgeryToken]
-        // // public async Task<IActionResult> Update(ProductCategory productCategory)
-        // // {
-        // // //    if (!ModelState.IsValid) return View();
-        // // //     // bool IsExits = _context.ProductCategories.Any(p => p.Name.ToLower().Trim() == productCategory.Name.ToLower().Trim());
-        // // //     // if (IsExits)
-        // // //     // {
-        // // //     //     ModelState.AddModelError("Name", "This category  already exits");
-        // // //     //     return View();
-        // // //     // }
-        // // //     //
-        // // //    await _context.ProductCategories.Where(p=>p.i)
-        // // // //  await _context.SaveChangesAsync();
-        // //
-        // //     return RedirectToAction(nameof(Index));
-        // // }
-
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return Json(new
-            {
-                Id = id
-            });
+            var category=await _context.ProductCategories.FindAsync(id);
+            category.IsDeleted = true;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

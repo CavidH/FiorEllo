@@ -1,0 +1,216 @@
+﻿@model ProductCategory  
+
+@{
+    int ProductCount = 0;
+}
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+
+<div class="content-page">
+<div class="content">
+
+<!-- Start Content-->
+<div class="container-fluid">
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Widgets</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb p-0 m-0">
+                    <li class="breadcrumb-item">
+                        <a href="#">Velonic</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Components</a>
+                    </li>
+                    <li class="breadcrumb-item active">Widgets</li>
+                </ol>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+@* <!--Widget-1 --> *@
+@* <div class="row "> *@
+@*     <div class="col-sm-6 col-xl-3"> *@
+@*         <div class="card"> *@
+@*             <div class="card-body text-center"> *@
+@*                 <div class="h2 mt-2 text-purple"> *@
+@* *@
+@*                 </div> *@
+@*                 <span class="mb-2 text-muted">Product Count</span> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* *@
+@*     <div class="col-sm-6 col-xl-3"> *@
+@*         <div class="card bg-primary"> *@
+@*             <div class="card-body text-center"> *@
+@*                 <div class="h2 mt-2 text-white"> *@
+@*                     @foreach (var  product in Model.Products) *@
+@*                     { *@
+@*                         ProductCount += product.Count; *@
+@*                     } *@
+@*                     @ProductCount *@
+@*                 </div> *@
+@*                 <span class="mb-2 text-white">Product Count</span> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* *@
+@*     <div class="col-sm-6 col-xl-3"> *@
+@*         <div class="card bg-warning"> *@
+@*             <div class="card-body text-center"> *@
+@*                 <div class="h2 mt-2 text-white">5210</div> *@
+@*                 <span class="mb-2 text-white">New Users</span> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* *@
+@*     <div class="col-sm-6 col-xl-3"> *@
+@*         <div class="card bg-purple"> *@
+@*             <div class="card-body text-center"> *@
+@*                 <div class="h2 mt-2 text-white">20544</div> *@
+@*                 <span class="mb-2 text-white">Visits</span> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* *@
+@* </div> *@
+@* <!-- end row --> *@
+
+<!--Widget-2 -->
+
+<div class="row">
+    <div class="col-xl-3 col-sm-6">
+        <div class="card widget-style-1 bg-pink">
+            <div class="card-body">
+                <div class="my-4 text-white">
+                    <i class="mdi mdi-comment-multiple"></i>
+                    <h2 class="my-0 font-weight-bold text-white">
+                        <span data-plugin="counterup">@Model.Products.Count</span>
+                    </h2>
+                    <div>Products</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-sm-6">
+        <div class="card widget-style-1 bg-warning">
+            <div class="card-body">
+                <div class="my-4 text-white">
+                    <i class="mdi mdi-cart"></i>
+                    <h2 class="my-0 text-white">
+                        <span data-plugin="counterup">
+                            @foreach (var  product in Model.Products)
+                            {
+                                ProductCount += product.Count;
+                            }
+                            @ProductCount   
+                        </span>
+                    </h2>
+                    <div> All Products Count</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* <div class="col-xl-3 col-sm-6"> *@
+    @*     <div class="card widget-style-1 bg-info"> *@
+    @*         <div class="card-body"> *@
+    @*             <div class="my-4 text-white"> *@
+    @*                 <i class="mdi mdi-cash"></i> *@
+    @*                 <h2 class="my-0 text-white"> *@
+    @*                     <span data-plugin="counterup">1268</span> *@
+    @*                 </h2> *@
+    @*                 <div>New Orders</div> *@
+    @*             </div> *@
+    @*         </div> *@
+    @*     </div> *@
+    @* </div> *@
+    @* *@
+    @* <div class="col-xl-3 col-sm-6"> *@
+    @*     <div class="card widget-style-1 bg-success"> *@
+    @*         <div class="card-body"> *@
+    @*             <div class="my-4 text-white"> *@
+    @*                 <i class="mdi mdi-account-multiple"></i> *@
+    @*                 <h2 class="my-0 text-white"> *@
+    @*                     <span data-plugin="counterup">145</span> *@
+    @*                 </h2> *@
+    @*                 <div>New Users</div> *@
+    @*             </div> *@
+    @*         </div> *@
+    @*     </div> *@
+    @* </div> *@
+</div>
+
+ 
+<div class="row">
+
+   
+    @* *@
+    @* <div class="col-xl-4"> *@
+    @*     <!-- Start Profile Widget --> *@
+    @*   @foreach (var product in Model.Products) *@
+    @*   { *@
+    @*       <div class="card"> *@
+    @*           <div class="profile-widget text-center"> *@
+    @*               <div class="bg-info p-5 bg-profile"></div> *@
+    @*               <img src="~/Assets/img/@product.Image.Where(p=>p.IsMain==true)" class="avatar-lg rounded-circle img-thumbnail" alt="img"> *@
+    @*               <h4 class="mt-4">Jonathan Doe</h4> *@
+    @*               <p class="mt-2"><i class="fa fa-map-marker"></i> London</p> *@
+    @*               <a href="#" class="btn btn-sm btn-purple mt-3">Follow</a> *@
+    @*               <div class=" row clearfix p-4"> *@
+    @*                   <div class="col-md-4"> *@
+    @*                       <h5>2.109</h5> *@
+    @*                       <span>Followers</span> *@
+    @*                   </div> *@
+    @*                   <div class="col-md-4"> *@
+    @*                       <h5>596</h5> *@
+    @*                       <span>Photos</span> *@
+    @*                   </div> *@
+    @*                   <div class="col-md-4"> *@
+    @*                       <h5>902</h5> *@
+    @*                       <span>Like</span>> *@
+    @*                   </div> *@
+    @*               </div> *@
+    @*           </div> *@
+    @*       </div> *@
+    @*   } *@
+    @*     <!-- End Profile Widget --> *@
+    @* </div> *@
+
+   
+</div>
+<!-- End row -->
+ 
+</div>
+<!-- end container-fluid -->
+
+</div>
+<!-- end content -->
+
+
+<!-- Footer Start -->
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                2015 - 2020 &copy; Velonic theme by <a href="#">Coderthemes</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end Footer -->
+
+</div>
+
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
