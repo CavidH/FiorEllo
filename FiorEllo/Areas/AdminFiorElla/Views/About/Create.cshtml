@@ -1,0 +1,92 @@
+﻿@model About
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">Form Validation</h4>
+                        <div class="page-title-right">
+                            <ol class="breadcrumb p-0 m-0">
+                                <li class="breadcrumb-item">
+                                    <a href="#">Velonic</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">Forms</a>
+                                </li>
+                                <li class="breadcrumb-item active">Form Validation</li>
+                            </ol>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title mb-4">Basic Form</h4>
+
+                            <form class="parsley-examples" method="post">
+                                <div class="form-group">
+
+                                    <label asp-for="Title">Title<span class="text-danger">*</span> </label>
+                                    <input asp-for="Title" parsley-trigger="change" required placeholder="Enter Title" class="form-control">
+                                    <span class="text-danger" asp-validation-for="Title"></span>
+                                </div>
+                                <div class="form-group">
+
+                                    <label asp-for="Head">Head<span class="text-danger">*</span> </label>
+                                    <input asp-for="Head" parsley-trigger="change" required placeholder="Enter Head " class="form-control">
+                                    <span class="text-danger" asp-validation-for="Head"></span>
+                                </div>
+                                <div class="form-group">
+
+                                    <label asp-for="Image">Image link<span class="text-danger">*</span> Example: h3-slider-background.jpg</label>
+                                    <input asp-for="Image" parsley-trigger="change" required placeholder="Enter name img in Assets img folder" class="form-control">
+                                    <span class="text-danger" asp-validation-for="Image"></span>
+                                </div>
+                                <div class="form-group text-right mb-0">
+                                    <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
+                                        Submit
+                                    </button>
+                                    <button type="reset" class="btn btn-secondary waves-effect waves-light">
+                                        Cancel
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <!-- end card -->
+                </div>
+                <!-- end col -->
+
+            </div>
+
+        </div>
+        <!-- end container-fluid -->
+
+    </div>
+    <!-- end content -->
+
+
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    2015 - 2020 &copy; Velonic theme by <a href="#">Coderthemes</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end Footer -->
+
+</div>
