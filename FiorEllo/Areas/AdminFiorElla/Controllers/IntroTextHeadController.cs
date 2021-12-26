@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
 {
+    [Area("AdminFiorElla")]
     public class IntroTextHeadController : Controller
     {
         // GET
@@ -14,21 +15,18 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         {
             _context = context;
         }
-        [Area("AdminFiorElla")]
         public async Task<IActionResult> Index()
         {
             var intro=await _context.Introtxt.FirstAsync();
             return View(intro);
         }
-        [Area("AdminFiorElla")]
-        public IActionResult Create()
-        {
-            return Json(new
-            {
-                Name = "Create"
-            });
-        }
-        [Area("AdminFiorElla")]
+        // public IActionResult Create()
+        // {
+        //     return Json(new
+        //     {
+        //         Name = "Create"
+        //     });
+        // }
         public IActionResult Detail(int id)
         {
             return Json(new
@@ -36,7 +34,6 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
                 Id = id
             });
         }
-        [Area("AdminFiorElla")]
         public IActionResult Update(int id)
         {
             return Json(new
@@ -44,7 +41,6 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
                 Id = id
             });
         }
-        [Area("AdminFiorElla")]
         public IActionResult Delete(int id)
         {
             return Json(new
