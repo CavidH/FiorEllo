@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
 {
+    [Area("AdminFiorElla")]
     public class ProductController : Controller
     {
         // GET
@@ -17,7 +18,6 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             _context = context;
         }
 
-        [Area("AdminFiorElla")]
 
         public IActionResult Index()
         {
@@ -27,12 +27,10 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
                 .Include(product => product.Category)
                 .Include(product => product.Image));
         }
-        [Area("AdminFiorElla")]
         public IActionResult Create()
         {
             return View();
         }
-        [Area("AdminFiorElla")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Product product)
@@ -57,7 +55,6 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Area("AdminFiorElla")]
         public IActionResult Detail(int id)
         {
             return Json(new
@@ -65,15 +62,17 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
                 Id=id
             });
         }
-        [Area("AdminFiorElla")]
-        public IActionResult Update(int id)
+        public async Task<IActionResult> Update(int id)
         {
-            return Json(new
-            {
-                Id = id
-            });
+           var product=await _context.Products.Include(p => p.Image).Where(p => p.Id==id).FirstAsync();
+            return View(product);
         }
-        [Area("AdminFiorElla")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(int id,Product product)
+        {
+            return View();
+        }
         public async Task<IActionResult> Delete(int id)
         {
             var product=await _context.Products.FindAsync(id);

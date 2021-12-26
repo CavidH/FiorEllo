@@ -43,12 +43,6 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             });
         }
         [Area("AdminFiorElla")]
-        public IActionResult Delete(int id)
-        {
-            return Json(new
-            {
-                Id = id
-            });
-        }
+        
     }
 }
