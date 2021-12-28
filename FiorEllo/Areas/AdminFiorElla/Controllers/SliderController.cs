@@ -3,6 +3,7 @@ using FiorEllo.DAL;
 using FiorEllo.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
 {
@@ -32,9 +33,20 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         public async Task<IActionResult> Create(SliderIntro slide)
         {
             if (ModelState["Photo"].ValidationState == ModelValidationState.Invalid) return View();
+            if (!slide.Photo.ContentType.Contains("image/"))
+            {
+                ModelState.AddModelError("Photo", "file  should be  image type ");
+                return View();
+            }
+
+            if (slide.Photo.Length / 1024 > 300)
+            {
+                ModelState.AddModelError("Photo", "file size must be less than 200kb");
+                return View();
+            }
 
 
-            return Content(slide.Photo.Length+" "+slide.Photo.FileName);
+            return Content(slide.Photo.Length + " " + slide.Photo.FileName);
             // await _context.Sliders.AddAsync(slide);
             // await _context.SaveChangesAsync();
             // return RedirectToAction(nameof(Index));
