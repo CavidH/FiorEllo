@@ -50,6 +50,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
                 ModelState.AddModelError("Photo", "file size must be less than 200kb");
                 return View();
             }
+
             string filename = await slide.Photo.SaveFileAsync(_env.WebRootPath, "Assets", "img");
             slide.Image = filename;
             await _context.Sliders.AddAsync(slide);
@@ -81,9 +82,12 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             var slide = await _context.Sliders.FindAsync(id);
+            if (slide == null) return NotFound();
+            Helper.RemoveFile(_env.WebRootPath,slide.Image,"Assets", "img");
             _context.Remove(slide);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
