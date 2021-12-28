@@ -36,8 +36,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(MultipleSliderVM sliderVm)
         {
-          
-            #region Single File Upload 
+            #region Single File Upload
 
             // if (ModelState["Photo"].ValidationState == ModelValidationState.Invalid) return View();
             // if (!slide.Photo.CheckFileType("image/"))
@@ -57,8 +56,32 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             // await _context.Sliders.AddAsync(slide);
             // await _context.SaveChangesAsync();
 
-
             #endregion
+
+            if (ModelState["Photos"].ValidationState == ModelValidationState.Invalid) return View();
+            foreach (var photo in sliderVm.Photos)
+            {
+                if (!photo.CheckFileType("image/"))
+                {
+                    ModelState.AddModelError("Photos", $"{photo.FileName} must be  image type ");
+                    return View();
+                }
+
+                if (!photo.CheckFileSize(300))
+                {
+                    ModelState.AddModelError("Photos", $"{photo.FileName} size must be less than 200kb");
+                    return View();
+                }
+            }
+
+            foreach (var photo in sliderVm.Photos)
+            {
+                string filename = await photo.SaveFileAsync(_env.WebRootPath, "Assets", "img");
+                await _context.Sliders.AddAsync(new SliderIntro {Image = filename});
+            }
+
+            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
