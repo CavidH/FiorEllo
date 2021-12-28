@@ -66,28 +66,51 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             });
         }
 
-        public async Task<IActionResult> Update(int id)
+        [HttpGet]
+        public async Task<IActionResult> Update(int? id)
         {
+            if (id == null) return NotFound();
             var slide = await _context.Sliders.FindAsync(id);
             return View(slide);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int id, SliderIntro slider)
+        public async Task<IActionResult> Update(int? id, SliderIntro slider)
         {
+            if (id == null) return NotFound();
+            if (!ModelState.IsValid) return View();
             var slide = await _context.Sliders.FindAsync(id);
-            slide.Image = slider.Image;
+            if (slider.Photo == null) return NotFound();
+            if (ModelState["Photo"].ValidationState == ModelValidationState.Invalid)
+                return RedirectToAction(nameof(Index));
+            Helper.RemoveFile(_env.WebRootPath, slide.Image, "Assets", "img");
+
+            if (!slider.Photo.CheckFileType("image/"))
+            {
+                ModelState.AddModelError("Photo", "file  should be  image type ");
+                return View();
+            }
+
+            if (!slider.Photo.CheckFileSize(300))
+            {
+                ModelState.AddModelError("Photo", "file size must be less than 200kb");
+                return View();
+            }
+
+            string filename = await slider.Photo.SaveFileAsync(_env.WebRootPath, "Assets", "img");
+            slide.Image = filename;
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
+
         public async Task<IActionResult> Delete(int id)
         {
             var slide = await _context.Sliders.FindAsync(id);
-            if (slide == null) return NotFound();
-            Helper.RemoveFile(_env.WebRootPath,slide.Image,"Assets", "img");
+            // if (slide == null) return NotFound();
+            Helper.RemoveFile(_env.WebRootPath, slide.Image, "Assets", "img");
             _context.Remove(slide);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

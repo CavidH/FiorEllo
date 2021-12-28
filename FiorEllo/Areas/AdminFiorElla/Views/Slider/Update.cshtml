@@ -15,7 +15,7 @@
                                 <li class="breadcrumb-item">
                                     <a href="#">Velonic</a>
                                 </li>
-                                  <li class="breadcrumb-item">
+                                <li class="breadcrumb-item">
                                     <a href="#">Forms</a>
                                 </li>
                                 <li class="breadcrumb-item active">Form Validation</li>
@@ -32,12 +32,12 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title mb-4">Basic Form</h4>
-
-                            <form class="parsley-examples" method="post" >
+                                    <img src="~/Assets/img/@Model.Image" width="250" style="border: 1px solid black"> </img> 
+                            <form class="parsley-examples" asp-action="Update" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label asp-for="Image">Image link<span class="text-danger">*</span>   Example: h3-slider-background.jpg</label>
-                                    <input asp-for="Image" value=@Model.Image parsley-trigger="change" required placeholder="Enter name img in Assets img folder" class="form-control" id="ProductName">
-                                    <span class="text-danger" asp-validation-for="Image"></span>
+                                    <label asp-for="Photo">Image <span class="text-danger">*</span> </label>
+                                    <input asp-for="Photo" parsley-trigger="change" accept="image/*" required placeholder="Enter img" class="form-control" id="ProductName">
+                                    <span class="text-danger" asp-validation-for="Photo"></span>
                                 </div>
                                 <div class="form-group text-right mb-0">
                                     <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
