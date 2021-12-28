@@ -6,10 +6,10 @@ namespace FiorEllo.ViewModel.ProductVM
 {
     public class ProductCreateVM
     {
-        public int Id { get; set; }
-        public Product Product { get; set; }
-        public List<IFormFile> Files { get; set; }
-
+        // public int Id { get; set; }
+        // public Product Product { get; set; }
+        // public List<IFormFile> Files { get; set; }
+        //
 
     }
 }

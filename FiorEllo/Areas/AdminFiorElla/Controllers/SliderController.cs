@@ -1,13 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FiorEllo.DAL;
 using FiorEllo.Models;
 using FiorEllo.Services.Utilities;
+using FiorEllo.ViewModel.Slider;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
 {
@@ -36,25 +34,31 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(SliderIntro slide)
+        public async Task<IActionResult> Create(MultipleSliderVM sliderVm)
         {
-            if (ModelState["Photo"].ValidationState == ModelValidationState.Invalid) return View();
-            if (!slide.Photo.CheckFileType("image/"))
-            {
-                ModelState.AddModelError("Photo", "file  should be  image type ");
-                return View();
-            }
+          
+            #region Single File Upload 
 
-            if (!slide.Photo.CheckFileSize(300))
-            {
-                ModelState.AddModelError("Photo", "file size must be less than 200kb");
-                return View();
-            }
+            // if (ModelState["Photo"].ValidationState == ModelValidationState.Invalid) return View();
+            // if (!slide.Photo.CheckFileType("image/"))
+            // {
+            //     ModelState.AddModelError("Photo", "file  should be  image type ");
+            //     return View();
+            // }
+            //
+            // if (!slide.Photo.CheckFileSize(300))
+            // {
+            //     ModelState.AddModelError("Photo", "file size must be less than 200kb");
+            //     return View();
+            // }
+            //
+            // string filename = await slide.Photo.SaveFileAsync(_env.WebRootPath, "Assets", "img");
+            // slide.Image = filename;
+            // await _context.Sliders.AddAsync(slide);
+            // await _context.SaveChangesAsync();
 
-            string filename = await slide.Photo.SaveFileAsync(_env.WebRootPath, "Assets", "img");
-            slide.Image = filename;
-            await _context.Sliders.AddAsync(slide);
-            await _context.SaveChangesAsync();
+
+            #endregion
             return RedirectToAction(nameof(Index));
         }
 
