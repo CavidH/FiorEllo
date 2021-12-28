@@ -8,5 +8,9 @@ namespace FiorEllo.Services.Utilities
         {
             return file.ContentType.Contains(type);
         }
+        public static bool CheckFileSize(this IFormFile file, int sizekb)
+        {
+            return  file.Length/1024<=sizekb;
+        }
     }
 }
