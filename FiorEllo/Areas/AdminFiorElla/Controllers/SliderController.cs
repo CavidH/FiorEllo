@@ -50,14 +50,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
                 ModelState.AddModelError("Photo", "file size must be less than 200kb");
                 return View();
             }
-
-            string filename = DateTime.Now.ToString("MMddyyyyhhmmss") + "_" + slide.Photo.FileName;
-            string resultPath = Path.Combine(_env.WebRootPath, "Assets", "img", filename);
-            using (FileStream fileStream = new FileStream(resultPath, FileMode.Create))
-            {
-                await slide.Photo.CopyToAsync(fileStream);
-            }
-
+            string filename = await slide.Photo.SaveFileAsync(_env.WebRootPath, "Assets", "img");
             slide.Image = filename;
             await _context.Sliders.AddAsync(slide);
             await _context.SaveChangesAsync();
