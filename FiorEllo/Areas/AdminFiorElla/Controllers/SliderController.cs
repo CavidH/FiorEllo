@@ -2,6 +2,7 @@
 using FiorEllo.DAL;
 using FiorEllo.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
 {
@@ -30,9 +31,13 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(SliderIntro slide)
         {
-            await _context.Sliders.AddAsync(slide);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (ModelState["Photo"].ValidationState == ModelValidationState.Invalid) return View();
+
+
+            return Content(slide.Photo.Length+" "+slide.Photo.FileName);
+            // await _context.Sliders.AddAsync(slide);
+            // await _context.SaveChangesAsync();
+            // return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Detail(int id)

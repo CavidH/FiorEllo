@@ -33,11 +33,11 @@
                         <div class="card-body">
                             <h4 class="header-title mb-4">Basic Form</h4>
 
-                            <form class="parsley-examples" method="post" >
+                            <form class="parsley-examples" method="post" enctype="multipart/form-data" >
                                 <div class="form-group">
-                                    <label asp-for="Image">Image link<span class="text-danger">*</span>   Example: h3-slider-background.jpg</label>
-                                    <input asp-for="Image" parsley-trigger="change" required placeholder="Enter name img in Assets img folder" class="form-control" id="ProductName">
-                                    <span class="text-danger" asp-validation-for="Image"></span>
+                                    <label asp-for="Photo">Image <span class="text-danger">*</span> </label>
+                                    <input asp-for="Photo" parsley-trigger="change" required placeholder="Enter img" class="form-control" id="ProductName">
+                                    <span class="text-danger" asp-validation-for="Photo"></span>
                                 </div>
                                 <div class="form-group text-right mb-0">
                                     <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
