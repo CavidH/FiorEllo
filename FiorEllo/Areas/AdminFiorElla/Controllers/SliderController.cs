@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 using FiorEllo.DAL;
 using FiorEllo.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -11,10 +14,12 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
     public class SliderController : Controller
     {
         private AppDbContext _context { get; }
+        private IWebHostEnvironment _env { get; }
 
-        public SliderController(AppDbContext context)
+        public SliderController(AppDbContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         public IActionResult Index()
@@ -45,11 +50,17 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
                 return View();
             }
 
+            string filename = DateTime.Now.ToString("MMddyyyyhhmmss") + "_" + slide.Photo.FileName;
+            string resultPath = Path.Combine(_env.WebRootPath, "Assets", "img", filename);
+            using (FileStream fileStream = new FileStream(resultPath, FileMode.Create))
+            {
+                await slide.Photo.CopyToAsync(fileStream);
+            }
 
-            return Content(slide.Photo.Length + " " + slide.Photo.FileName);
-            // await _context.Sliders.AddAsync(slide);
-            // await _context.SaveChangesAsync();
-            // return RedirectToAction(nameof(Index));
+            slide.Image = filename;
+            await _context.Sliders.AddAsync(slide);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Detail(int id)
