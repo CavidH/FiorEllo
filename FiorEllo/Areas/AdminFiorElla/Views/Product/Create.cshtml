@@ -15,7 +15,7 @@
                                 <li class="breadcrumb-item">
                                     <a href="#">Velonic</a>
                                 </li>
-                                  <li class="breadcrumb-item">
+                                <li class="breadcrumb-item">
                                     <a href="#">Forms</a>
                                 </li>
                                 <li class="breadcrumb-item active">Form Validation</li>
@@ -33,7 +33,7 @@
                         <div class="card-body">
                             <h4 class="header-title mb-4">Basic Form</h4>
 
-                            <form class="parsley-examples" method="post" >
+                            <form class="parsley-examples" method="post">
                                 <div class="form-group">
                                     <label asp-for="Name">Name<span class="text-danger">*</span></label>
                                     <input asp-for="Name" parsley-trigger="change" required placeholder="Enter Product name" class="form-control" id="ProductName">
@@ -50,10 +50,14 @@
                                     <span class="text-danger" asp-validation-for="Count"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="CategoryId">CategoryId<span class="text-danger">*</span></label>
-                                    <input asp-for="CategoryId" parsley-trigger="change" required placeholder="Enter Product CategoryId" class="form-control" id="ProductCategoryId">
-                                    <span class="text-danger" asp-validation-for="CategoryId"></span>
-                                </div> <div class="form-group">
+                                    <select class="form-control" asp-for="CategoryId">
+                                        @foreach (var category in (List<ProductCategory>) ViewBag.categories)
+                                        {
+                                            <option value="@category.Id" >@category.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label>Product Image<span class="text-danger">*</span></label>
                                     <input type="file" class="form-control" id="example-fileinput">
                                 </div>

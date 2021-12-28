@@ -27,8 +27,9 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
                 .Include(product => product.Category)
                 .Include(product => product.Image));
         }
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewBag.categories = await _context.ProductCategories.Where(p => p.IsDeleted == false).ToListAsync();
             return View();
         }
         [HttpPost]
