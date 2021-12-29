@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using FiorEllo.DAL;
 using FiorEllo.Models;
 using FiorEllo.Services.Utilities;
 using FiorEllo.ViewModel.Slider;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -14,6 +16,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
     {
         private AppDbContext _context { get; }
         private IWebHostEnvironment _env { get; }
+        private string _erorrMessage;
 
         public SliderController(AppDbContext context, IWebHostEnvironment env)
         {
@@ -59,19 +62,10 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             #endregion
 
             if (ModelState["Photos"].ValidationState == ModelValidationState.Invalid) return View();
-            foreach (var photo in sliderVm.Photos)
+            if (!ChechkImageValid(sliderVm.Photos))
             {
-                if (!photo.CheckFileType("image/"))
-                {
-                    ModelState.AddModelError("Photos", $"{photo.FileName} must be  image type ");
-                    return View();
-                }
-
-                if (!photo.CheckFileSize(300))
-                {
-                    ModelState.AddModelError("Photos", $"{photo.FileName} size must be less than 200kb");
-                    return View();
-                }
+                ModelState.AddModelError("Photos", _erorrMessage);
+                return View();
             }
 
             foreach (var photo in sliderVm.Photos)
@@ -83,6 +77,26 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        private bool ChechkImageValid(List<IFormFile> photos)
+        {
+            foreach (var photo in photos)
+            {
+                if (!photo.CheckFileType("image/"))
+                {
+                    _erorrMessage = $"{photo.FileName} must be  image type ";
+                    return false;
+                }
+
+                if (!photo.CheckFileSize(300))
+                {
+                    _erorrMessage = $"{photo.FileName} size must be less than 200kb";
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public IActionResult Detail(int id)
