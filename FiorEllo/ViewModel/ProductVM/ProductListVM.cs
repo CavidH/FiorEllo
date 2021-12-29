@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace FiorEllo.ViewModel.ProductVM
 {
-    public class ProductCreateVM
+    public class ProductListVM
     {
         public int Id { get; set; }
         public string Name { get; set; }
