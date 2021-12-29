@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using FiorEllo.DAL;
 using FiorEllo.Models;
@@ -32,6 +33,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewData["count"] = GetEmptySliderCount();
             return View();
         }
 
@@ -61,6 +63,15 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
 
             #endregion
 
+            int EmptySlide = GetEmptySliderCount();
+
+            if (sliderVm.Photos.Count > EmptySlide)
+            {
+                ModelState.AddModelError("Photos",
+                    $"hal hazirda {EmptySlide} eded slide yukleye bilersiz  **Limit 5 slide");
+                return View();
+            }
+
             if (ModelState["Photos"].ValidationState == ModelValidationState.Invalid) return View();
             if (!ChechkImageValid(sliderVm.Photos))
             {
@@ -77,6 +88,11 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        private int GetEmptySliderCount()
+        {
+            return 5 - _context.Sliders.Count();
         }
 
         private bool ChechkImageValid(List<IFormFile> photos)
@@ -98,6 +114,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
 
             return true;
         }
+
 
         public IActionResult Detail(int id)
         {
