@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using FiorEllo.DAL;
 using FiorEllo.Models;
+using FiorEllo.ViewModel.ProductVM;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,13 +21,35 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         }
 
 
-        public IActionResult Index()
+        public async  Task<IActionResult> Index()
         {
-            return View(_context
+            var products= await _context
                 .Products
                 .Where(product => product.IsDeleted == false)
                 .Include(product => product.Category)
-                .Include(product => product.Image));
+                .Include(product => product.Image)
+                .OrderBy(p=>p.Id)
+                .ToListAsync();
+            return View();
+        }
+
+        private List<ProductListVM> getProductList(List<Product> products)
+        {
+            List<ProductListVM> productLis = new List<ProductListVM>();
+            foreach (var product in products)
+            {
+                var productVM = new ProductListVM
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Price = product.Price,
+                    Count = product.Count,
+                    CategoryName = product.Category.Name,
+                    ProductImage = product.Image.Where(p => p.IsMain == true).FirstOrDefault().Image
+                };
+                productLis.Add(productVM);
+            }
+            return productLis;
         }
         public async Task<IActionResult> Create()
         {

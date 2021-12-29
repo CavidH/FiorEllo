@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using FiorEllo.Models;
-using Microsoft.AspNetCore.Http;
+﻿using FiorEllo.Models;
 
 namespace FiorEllo.ViewModel.ProductVM
 {
@@ -10,10 +8,8 @@ namespace FiorEllo.ViewModel.ProductVM
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int Count { get; set; }
-        public bool IsDeleted { get; set; }
-        public int CategoryId { get; set; }
-        public ProductCategory Category { get; set; }
-        public List<IFormFile> Files { get; set; }
+        public string ProductImage { get; set; }
+        public string CategoryName { get; set; }
 
     }
 }

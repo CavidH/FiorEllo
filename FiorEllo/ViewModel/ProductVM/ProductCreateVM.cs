@@ -6,14 +6,14 @@ namespace FiorEllo.ViewModel.ProductVM
 {
     public class ProductCreateVM
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public int Count { get; set; }
-        public bool IsDeleted { get; set; }
-        public int CategoryId { get; set; }
-        public ProductCategory Category { get; set; }
-        public List<IFormFile> Files { get; set; }
+        //public int Id { get; set; }
+        //public string Name { get; set; }
+        //public decimal Price { get; set; }
+        //public int Count { get; set; }
+        //public bool IsDeleted { get; set; }
+        //public int CategoryId { get; set; }
+        //public ProductCategory Category { get; set; }
+        //public List<IFormFile> Files { get; set; }
 
     }
 }
