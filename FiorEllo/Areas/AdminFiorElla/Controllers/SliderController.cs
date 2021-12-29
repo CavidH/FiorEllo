@@ -67,8 +67,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
 
             if (sliderVm.Photos.Count > EmptySlide)
             {
-                ModelState.AddModelError("Photos",
-                    $"hal hazirda {EmptySlide} eded slide yukleye bilersiz  **Limit 5 slide");
+                ModelState.AddModelError("Photos", $"hal hazirda {EmptySlide} eded slide yukleye bilersiz  **Limit 5 slide");
                 return View();
             }
 
