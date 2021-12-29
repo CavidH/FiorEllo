@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Product>  
+﻿@model List<ProductListVM> 
 @{
     int count = 1;
 }
@@ -38,14 +38,15 @@
                                 <tbody>
                                 @foreach (var product in Model)
                                 {
+                                    
                                     <tr>
                                         <td>@count</td>
                                         <td>@product.Name</td>
                                         <td>
-                                            <img src="~/Assets/img/@product.Image.Where(image => image.IsMain == true).FirstOrDefault().Image" width="50" class="img-fluid" alt="">
+                                            <img src="~/Assets/img/@product.ProductImage" width="50" class="img-fluid" alt="">
                                         </td>
                                         <td>@product.Count</td>
-                                        <td>@product.Category.Name</td>
+                                        <td>@product.CategoryName</td>
                                         <td>@product.Price</td>
                                         <td>
                                             <a class="btn btn-icon waves-effect waves-light btn-primary" asp-action="Detail" asp-route-id="@product.Id">

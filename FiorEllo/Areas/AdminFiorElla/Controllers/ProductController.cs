@@ -30,7 +30,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
                 .Include(product => product.Image)
                 .OrderBy(p=>p.Id)
                 .ToListAsync();
-            return View();
+            return View(getProductList(products));
         }
 
         private List<ProductListVM> getProductList(List<Product> products)
