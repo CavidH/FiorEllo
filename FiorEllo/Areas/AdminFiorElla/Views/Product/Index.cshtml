@@ -84,13 +84,18 @@
                                     </li>
                                 }
                                 @{
-                                    var start = Model.CurrentPage;
-                                    var end = start + 3;
-                                    for (int i = start; i < end; i++)
+                                    if (Model.CurrentPage < ViewBag.PageCount)
                                     {
-                                        <li class="page-item @(Model.CurrentPage == i ? "disabled" : "")">
-                                            <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
-                                        </li>
+
+
+                                        var start = Model.CurrentPage;
+                                        var end = start + 3;
+                                        for (int i = start; i < end; i++)
+                                        {
+                                            <li class="page-item @(Model.CurrentPage == i ? "disabled" : "")">
+                                                <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                                            </li>
+                                        }
                                     }
                                 }
                                 @if (Model.CurrentPage < ViewBag.PageCount)
