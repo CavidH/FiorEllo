@@ -37,6 +37,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
             var ProductVMs = getProductList(products);
             var PageCount = getPageCount(take);
             Paginate<ProductListVM> ProductPaginate = new Paginate<ProductListVM>(ProductVMs, page, PageCount);
+            ViewBag.PageCount = getPageCount(take);
            // return Json(ProductPaginate);
               return View(ProductPaginate);
         }
