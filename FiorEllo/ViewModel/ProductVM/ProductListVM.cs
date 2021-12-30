@@ -10,6 +10,7 @@ namespace FiorEllo.ViewModel.ProductVM
         public int Count { get; set; }
         public string ProductImage { get; set; }
         public string CategoryName { get; set; }
+        public int CurrentPage { get; set; }
 
     }
 }

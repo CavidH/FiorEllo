@@ -21,14 +21,16 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         }
 
 
-        public async  Task<IActionResult> Index()
+        public async  Task<IActionResult> Index(int page=1,int take=10)
         {
             var products= await _context
                 .Products
                 .Where(product => product.IsDeleted == false)
+                .OrderBy(p=>p.Id)
+                .Skip((page-1)*take)
+                .Take(take) 
                 .Include(product => product.Category)
                 .Include(product => product.Image)
-                .OrderBy(p=>p.Id)
                 .ToListAsync();
             return View(getProductList(products));
         }
