@@ -15,6 +15,8 @@
     <Compile Remove="Migrations\20211221074411_SettigLoadBtn.Designer.cs" />
     <Compile Remove="Migrations\20211223071902_Setting.cs" />
     <Compile Remove="Migrations\20211223071902_Setting.Designer.cs" />
+    <Compile Remove="Migrations\20220105145049_createuser.cs" />
+    <Compile Remove="Migrations\20220105145049_createuser.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

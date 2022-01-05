@@ -32,22 +32,22 @@ namespace FiorEllo
             });
             services.AddSession(option => { option.IdleTimeout = TimeSpan.FromSeconds(20); });
 
-
-            services.AddIdentity<ApplicationUser, IdentityRole>(identityOptions =>
-                {
-                    identityOptions.Password.RequiredLength = 8;
-                    identityOptions.Password.RequireNonAlphanumeric = true;
-                    identityOptions.Password.RequireLowercase = true;
-                    identityOptions.Password.RequireUppercase = true;
-                    identityOptions.Password.RequireDigit = true;
-
-                    identityOptions.User.RequireUniqueEmail = true;
-                    identityOptions.Lockout.MaxFailedAccessAttempts = 3;
-                    identityOptions.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
-                    identityOptions.Lockout.AllowedForNewUsers = true;
-                })
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders();    
+            services.Configure<IdentityOptions>(identityOptions =>
+            {
+                identityOptions.Password.RequiredLength = 8;
+                identityOptions.Password.RequireNonAlphanumeric = true;
+                identityOptions.Password.RequireLowercase = true;
+                identityOptions.Password.RequireUppercase = true;
+                identityOptions.Password.RequireDigit = true;
+
+                identityOptions.User.RequireUniqueEmail = true;
+                identityOptions.Lockout.MaxFailedAccessAttempts = 3;
+                identityOptions.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+                identityOptions.Lockout.AllowedForNewUsers = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
