@@ -27,7 +27,7 @@ namespace FiorEllo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterVM register)
         {
-            if (ModelState.IsValid) return View(register);
+            if (!ModelState.IsValid) return View(register);
             ApplicationUser newUser = new ApplicationUser
             {
                 FullName = register.FullName,
@@ -40,12 +40,13 @@ namespace FiorEllo.Controllers
                 foreach (var error in IdentityResult.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
+                    //return Json(error.Description);
                 }
 
                 return View(register);
             }
 
-            return View();
+            return Json("ok");
         }
     }
 }
