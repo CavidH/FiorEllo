@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using FiorEllo.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace FiorEllo
 {
@@ -29,6 +31,23 @@ namespace FiorEllo
                 options.UseSqlServer(Configuration["ConnectionStrings:Default"]);
             });
             services.AddSession(option => { option.IdleTimeout = TimeSpan.FromSeconds(20); });
+
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(identityOptions =>
+                {
+                    identityOptions.Password.RequiredLength = 8;
+                    identityOptions.Password.RequireNonAlphanumeric = true;
+                    identityOptions.Password.RequireLowercase = true;
+                    identityOptions.Password.RequireUppercase = true;
+                    identityOptions.Password.RequireDigit = true;
+
+                    identityOptions.User.RequireUniqueEmail = true;
+                    identityOptions.Lockout.MaxFailedAccessAttempts = 3;
+                    identityOptions.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+                    identityOptions.Lockout.AllowedForNewUsers = true;
+                })
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
