@@ -59,6 +59,8 @@ namespace FiorEllo.Controllers
             var Token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
             var ConfirmationLink = Url.Action("ConfirmEmail", "Auth",
                 new {userId = newUser.Id, token = Token}, Request.Scheme);
+
+            // msgSender(newUser.Email, ConfirmationLink);
             //mail send
             await _signInManager.SignInAsync(newUser, isPersistent: false);
             return RedirectToAction("Index", "Home");
@@ -101,5 +103,18 @@ namespace FiorEllo.Controllers
             ViewData["msg"]=msgerror;
             return View();
         }
+
+        // private void sendMsgEmail(string From ,string password,string ToEmail,string msgBody,string msgTitle="Email Confirm FiorElla")
+        // {
+        //     var smtpClient = new System.Net.Mail.SmtpClient("smtp.mail.ru", 587);
+        //     smtpClient.Credentials = new System.Net.NetworkCredential(From, password);
+        //     smtpClient.EnableSsl = true;
+        //     smtpClient.Send(new System.Net.Mail.MailMessage(From,ToEmail,msgTitle,msgBody));
+        // }
+        // private  void  msgSender(string toEmail, string link)
+        // {
+        //     string msgBody = " sizin testiq linkiniz "+link;
+        //     sendMsgEmail("cavid.haciyev.2002@mail.ru", "expres2002", toEmail, msgBody);
+        // }
     }
 }
