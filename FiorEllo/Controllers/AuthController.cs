@@ -5,17 +5,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using FiorEllo.Models;
 using FiorEllo.ViewModel.Auth;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 
 namespace FiorEllo.Controllers
 {
     public class AuthController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
+        private SignInManager<ApplicationUser> _signInManager;
+        private ILogger<ApplicationUser> _logger ;
+       
+       
 
-        public AuthController(UserManager<ApplicationUser> userManager)
+
+        public AuthController(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager,ILogger<ApplicationUser> logger)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
+            _logger = logger;
+
         }
 
         public IActionResult Register()
@@ -46,7 +56,50 @@ namespace FiorEllo.Controllers
                 return View(register);
             }
 
-            return Json("ok");
+            var Token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
+            var ConfirmationLink = Url.Action("ConfirmEmail", "Auth",
+                new {userId = newUser.Id, token = Token}, Request.Scheme);
+            //mail send
+            await _signInManager.SignInAsync(newUser, isPersistent: false);
+            return RedirectToAction("Index", "Home");
+        }
+        public IActionResult Login()
+        {
+            return Json("login");
+        } 
+        public IActionResult Logout()
+        {
+            return Json("logout");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (userId==null || token==null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user==null)
+            {
+                // ViewBag.ErrorMessage = $"bele user id:{userId} movcud deyil";
+                string ErrorMsg=$"bele user id:{userId} movcud deyil";
+                ViewData["msg"]=ErrorMsg;
+                 return View();
+            }
+
+            var result =await _userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                string msg = "testiqleme uchun tesekkur edirik";
+                ViewData["msg"]=msg;
+                return View();
+            }
+            string msgerror = "testiqleme de problem oldu";
+            ViewData["msg"]=msgerror;
+            return View();
         }
     }
 }

@@ -144,6 +144,17 @@
                                     @*     $1$ <li class="">No products in the cart.</li> #1# *@
                                     @* </ul> *@
                                 </li>
+                                <li>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <h4>@User.Identity.Name</h4>
+                                        <a asp-controller="Auth" asp-action="Logout">Logout</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="Login">Login</a>
+                                    }
+                                </li>
                             </ul>
                         </div>
 
