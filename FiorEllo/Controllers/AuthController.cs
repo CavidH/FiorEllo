@@ -71,6 +71,12 @@ namespace FiorEllo.Controllers
         public IActionResult Login()
         {
             return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Login(LoginVM loginVm)
+        {
+            return View();
         } 
         public IActionResult Logout()
         {
