@@ -17,9 +17,9 @@ namespace FiorEllo.Controllers
         private SignInManager<ApplicationUser> _signInManager;
         private ILogger<ApplicationUser> _logger ;
        
-       
 
 
+        
         public AuthController(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager,ILogger<ApplicationUser> logger)
         {
             _userManager = userManager;
@@ -33,6 +33,7 @@ namespace FiorEllo.Controllers
             return View();
         }
 
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterVM register)
@@ -60,9 +61,11 @@ namespace FiorEllo.Controllers
             var ConfirmationLink = Url.Action("ConfirmEmail", "Auth",
                 new {userId = newUser.Id, token = Token}, Request.Scheme);
 
+            
             // msgSender(newUser.Email, ConfirmationLink);
             //mail send
             await _signInManager.SignInAsync(newUser, isPersistent: false);
+         
             return RedirectToAction("Index", "Home");
         }
         public IActionResult Login()
@@ -114,7 +117,7 @@ namespace FiorEllo.Controllers
         // private  void  msgSender(string toEmail, string link)
         // {
         //     string msgBody = " sizin testiq linkiniz "+link;
-        //     sendMsgEmail("cavid.haciyev.2002@mail.ru", "expres2002", toEmail, msgBody);
+        //     sendMsgEmail("  toEmail, msgBody);
         // }
     }
 }
