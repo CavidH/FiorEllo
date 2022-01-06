@@ -59,7 +59,7 @@ namespace FiorEllo.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FullName = table.Column<string>(nullable: true),
-                    IsActived = table.Column<bool>(nullable: false,defaultValue:false)
+                    IsActived = table.Column<bool>(nullable: false,defaultValue:true)
                 },
                 constraints: table =>
                 {

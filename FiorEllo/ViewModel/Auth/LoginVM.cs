@@ -7,6 +7,7 @@ namespace FiorEllo.ViewModel.Auth
         [Required, MaxLength(255),DataType(DataType.EmailAddress)]
         public string EMail { get; set; }
         [Required, MaxLength(255), DataType(DataType.Password)]
-        public string Passvord { get; set; }
+        public string Password { get; set; }
+        public bool RememberMe { get; set; }
     }
 }
