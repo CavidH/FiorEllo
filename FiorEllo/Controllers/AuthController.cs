@@ -15,7 +15,7 @@ namespace FiorEllo.Controllers
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
-        private ILogger<ApplicationUser> _logger ;
+       // private ILogger<ApplicationUser> _logger ;
        
 
 
@@ -24,7 +24,7 @@ namespace FiorEllo.Controllers
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _logger = logger;
+           // _logger = logger;
 
         }
 
@@ -70,7 +70,7 @@ namespace FiorEllo.Controllers
         }
         public IActionResult Login()
         {
-            return Json("login");
+            return View();
         } 
         public IActionResult Logout()
         {
