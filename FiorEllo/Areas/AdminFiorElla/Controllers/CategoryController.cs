@@ -19,7 +19,7 @@ namespace FiorEllo.Areas.AdminFiorElla.Controllers
         {
             _context = context;
         }
-
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View(_context.ProductCategories.Where(p=>p.IsDeleted==false));
