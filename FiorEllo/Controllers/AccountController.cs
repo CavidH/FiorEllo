@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace FiorEllo.Controllers
 {
-    public class AuthController : Controller
+    public class AccountController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
 
@@ -20,7 +20,7 @@ namespace FiorEllo.Controllers
         // private ILogger<ApplicationUser> _logger ;
 
 
-        public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
             ILogger<ApplicationUser> logger)
         {
             _userManager = userManager;
@@ -58,7 +58,7 @@ namespace FiorEllo.Controllers
             }
 
             var Token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
-            var ConfirmationLink = Url.Action("ConfirmEmail", "Auth",
+            var ConfirmationLink = Url.Action("ConfirmEmail", "Account",
                 new {userId = newUser.Id, token = Token}, Request.Scheme);
 
 

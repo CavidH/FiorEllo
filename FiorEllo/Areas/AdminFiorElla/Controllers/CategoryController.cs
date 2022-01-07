@@ -2,12 +2,14 @@
 using System.Threading.Tasks;
 using FiorEllo.DAL;
 using FiorEllo.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
 {
     [Area("AdminFiorElla")]
+    [Authorize]
 
     public class CategoryController : Controller
     {
