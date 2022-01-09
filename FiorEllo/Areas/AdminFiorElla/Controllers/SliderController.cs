@@ -5,6 +5,7 @@ using FiorEllo.DAL;
 using FiorEllo.Models;
 using FiorEllo.Services.Utilities;
 using FiorEllo.ViewModel.Slider;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
 {
     [Area("AdminFiorElla")]
+    [Authorize]
     public class SliderController : Controller
     {
         private AppDbContext _context { get; }

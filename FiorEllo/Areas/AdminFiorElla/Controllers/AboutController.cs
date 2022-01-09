@@ -2,11 +2,13 @@
 using System.Threading.Tasks;
 using FiorEllo.DAL;
 using FiorEllo.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
 {
     [Area("AdminFiorElla")]
+    [Authorize]
     public class AboutController : Controller
     {
         private AppDbContext _context { get; }

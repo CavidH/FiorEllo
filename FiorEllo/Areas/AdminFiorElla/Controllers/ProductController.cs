@@ -6,12 +6,14 @@ using FiorEllo.DAL;
 using FiorEllo.Models;
 using FiorEllo.ViewModel;
 using FiorEllo.ViewModel.ProductVM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FiorEllo.Areas.AdminFiorElla.Controllers
 {
     [Area("AdminFiorElla")]
+    [Authorize]
     public class ProductController : Controller
     {
         // GET

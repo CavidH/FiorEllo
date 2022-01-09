@@ -76,7 +76,7 @@ namespace FiorEllo.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginVM login)
+        public async Task<IActionResult> Login(LoginVM login,string ReturnUrl)
         {
             if (login == null) return BadRequest();
             var user = await _userManager.FindByEmailAsync(login.EMail);
@@ -104,7 +104,7 @@ namespace FiorEllo.Controllers
                 await _signInManager.SignInAsync(user, true);
             }
 
-            return RedirectToAction("Index", "Home");
+            return Redirect(ReturnUrl);
         }
 
         public async Task<IActionResult> Logout()
@@ -175,8 +175,7 @@ namespace FiorEllo.Controllers
         [HttpPost]
         public  async Task<IActionResult>  ResetPassword( ResetPassword resetPassword)
         {
-            if (!ModelState.IsValid)
-                return View(resetPassword);
+            if (!ModelState.IsValid) return View(resetPassword);
  
             var user = await _userManager.FindByEmailAsync(resetPassword.Email);
             if (user == null)
@@ -198,5 +197,13 @@ namespace FiorEllo.Controllers
         {
             return View();
         }
+
+        // private IActionResult CheckAuthenticated()
+        // {
+        //     if (User.Identity.IsAuthenticated)
+        //     {
+        //         return View();
+        //     }
+        // }
     }
 }
