@@ -25,6 +25,7 @@ namespace FiorEllo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+        
             services.AddControllersWithViews().AddRazorRuntimeCompilation(); // for hard refres
             services.AddDbContext<AppDbContext>(options =>
             {

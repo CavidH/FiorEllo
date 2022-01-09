@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using FiorEllo.Models;
+using FiorEllo.Services.Utilities;
 using FiorEllo.ViewModel.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using MailKit.Net.Smtp;
+using MailKit;
+using MimeKit;
 
 namespace FiorEllo.Controllers
 {
@@ -62,8 +63,8 @@ namespace FiorEllo.Controllers
                 new {userId = newUser.Id, token = Token}, Request.Scheme);
 
 
-            // msgSender(newUser.Email, ConfirmationLink);
-            //mail send
+            EmailHelper.EmailContentBuilder(register.Email, ConfirmationLink, "Confirm Email");
+             
             await _signInManager.SignInAsync(newUser, isPersistent: false);
 
             return RedirectToAction("Index", "Home");
@@ -101,11 +102,10 @@ namespace FiorEllo.Controllers
 
             if (signResult.Succeeded)
             {
-                await _signInManager.SignInAsync(user,true);
+                await _signInManager.SignInAsync(user, true);
             }
 
             return RedirectToAction("Index", "Home");
-
         }
 
         public async Task<IActionResult> Logout()
@@ -145,12 +145,34 @@ namespace FiorEllo.Controllers
             return View();
         }
 
-        // private void sendMsgEmail(string From ,string password,string ToEmail,string msgBody,string msgTitle="Email Confirm FiorElla")
+        // private void sendMsgEmail()
         // {
-        //     var smtpClient = new System.Net.Mail.SmtpClient("smtp.mail.ru", 587);
-        //     smtpClient.Credentials = new System.Net.NetworkCredential(From, password);
-        //     smtpClient.EnableSsl = true;
-        //     smtpClient.Send(new System.Net.Mail.MailMessage(From,ToEmail,msgTitle,msgBody));
+        //     // string emailAddress = "smtp.mail.ru";
+        //     // string password = "expres2002";
+        //     // MimeMessage msg = new MimeMessage();
+        //     // msg.From.Add(new MailboxAddress("Cavid", "tu201906038@code.edu.az"));
+        //     // msg.To.Add(MailboxAddress.Parse("tu201906038@code.edu.az"));
+        //     // msg.Subject = "bu subject dir";
+        //     // msg.Body = new TextPart("plain")
+        //     // {
+        //     //     Text = "salam bu mail msg dor"
+        //     // };
+        //     // SmtpClient client = new SmtpClient();
+        //     // try
+        //     // {
+        //     //     client.Connect("smtp.gmail.com", 465, true);
+        //     //     client.Authenticate(emailAddress, password);
+        //     //     client.Send(msg);
+        //     // }
+        //     // catch (Exception e)
+        //     // {
+        //     //     Console.WriteLine(e.Message);
+        //     // }
+        //     // finally
+        //     // {
+        //     //     client.Disconnect(true);
+        //     //     client.Dispose();
+        //     // }
         // }
         // private  void  msgSender(string toEmail, string link)
         // {
