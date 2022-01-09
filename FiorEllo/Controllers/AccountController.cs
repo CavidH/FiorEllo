@@ -7,12 +7,10 @@ using FiorEllo.ViewModel.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using MailKit.Net.Smtp;
-using MailKit;
-using MimeKit;
 
 namespace FiorEllo.Controllers
 {
+     
     public class AccountController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
@@ -37,6 +35,7 @@ namespace FiorEllo.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> Register(RegisterVM register)
         {
             if (!ModelState.IsValid) return View(register);
@@ -57,14 +56,14 @@ namespace FiorEllo.Controllers
 
                 return View(register);
             }
-
+            
             var Token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
             var ConfirmationLink = Url.Action("ConfirmEmail", "Account",
                 new {userId = newUser.Id, token = Token}, Request.Scheme);
 
 
             EmailHelper.EmailContentBuilder(register.Email, ConfirmationLink, "Confirm Email");
-             
+
             await _signInManager.SignInAsync(newUser, isPersistent: false);
 
             return RedirectToAction("Index", "Home");
@@ -145,39 +144,59 @@ namespace FiorEllo.Controllers
             return View();
         }
 
-        // private void sendMsgEmail()
-        // {
-        //     // string emailAddress = "smtp.mail.ru";
-        //     // string password = "expres2002";
-        //     // MimeMessage msg = new MimeMessage();
-        //     // msg.From.Add(new MailboxAddress("Cavid", "tu201906038@code.edu.az"));
-        //     // msg.To.Add(MailboxAddress.Parse("tu201906038@code.edu.az"));
-        //     // msg.Subject = "bu subject dir";
-        //     // msg.Body = new TextPart("plain")
-        //     // {
-        //     //     Text = "salam bu mail msg dor"
-        //     // };
-        //     // SmtpClient client = new SmtpClient();
-        //     // try
-        //     // {
-        //     //     client.Connect("smtp.gmail.com", 465, true);
-        //     //     client.Authenticate(emailAddress, password);
-        //     //     client.Send(msg);
-        //     // }
-        //     // catch (Exception e)
-        //     // {
-        //     //     Console.WriteLine(e.Message);
-        //     // }
-        //     // finally
-        //     // {
-        //     //     client.Disconnect(true);
-        //     //     client.Dispose();
-        //     // }
-        // }
-        // private  void  msgSender(string toEmail, string link)
-        // {
-        //     string msgBody = " sizin testiq linkiniz "+link;
-        //     sendMsgEmail("  toEmail, msgBody);
-        // }
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ResetVM resetVm)
+        {
+            if (!ModelState.IsValid) return View(resetVm);
+            var user = await _userManager.FindByEmailAsync(resetVm.Email);
+            if (user == null)
+            {
+                ModelState.AddModelError(String.Empty, "Bele user movcud deyil");
+                return View();
+            }
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var Resetlink = Url.Action("ResetPassword", "Account", new { token, email = user.Email }, Request.Scheme);
+            EmailHelper.EmailContentBuilder(resetVm.Email,Resetlink,"Reset Password","parolu sıfırlamaq üçün təstiq et buttonuna klik edin");
+            // return RedirectToAction("Index","Home");
+            return Content("Please Check Your Email");
+        }
+        [AllowAnonymous]
+        public IActionResult ResetPassword( string token,string email)
+        {
+            var model = new ResetPassword { Token = token, Email = email };
+            return View(model);
+             
+        }
+        [HttpPost]
+        public  async Task<IActionResult>  ResetPassword( ResetPassword resetPassword)
+        {
+            if (!ModelState.IsValid)
+                return View(resetPassword);
+ 
+            var user = await _userManager.FindByEmailAsync(resetPassword.Email);
+            if (user == null)
+                RedirectToAction("ResetPasswordConfirmation");
+ 
+            var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Password);
+            if (!resetPassResult.Succeeded)
+            {
+                foreach (var error in resetPassResult.Errors)
+                    ModelState.AddModelError(error.Code, error.Description);
+                return View();
+            }
+ 
+            return RedirectToAction("ResetPasswordConfirmation","Account");
+
+        }
+        [AllowAnonymous]
+        public IActionResult ResetPasswordConfirmation()
+        {
+            return View();
+        }
     }
 }

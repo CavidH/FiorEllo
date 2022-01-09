@@ -31,11 +31,9 @@ namespace FiorEllo
             {
                 options.UseSqlServer(Configuration["ConnectionStrings:Default"]);
             });
+            services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(10));
             services.AddSession(option => { option.IdleTimeout = TimeSpan.FromSeconds(20); });
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddDefaultTokenProviders();    
             services.Configure<IdentityOptions>(identityOptions =>
             {
                 identityOptions.Password.RequiredLength = 8;
@@ -49,6 +47,10 @@ namespace FiorEllo
                 identityOptions.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
                 identityOptions.Lockout.AllowedForNewUsers = true;
             });
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();    
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
