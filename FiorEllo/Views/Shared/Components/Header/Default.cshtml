@@ -152,7 +152,7 @@
                                     }
                                     else
                                     {
-                                        <a asp-controller="Account" asp-action="Login">Login</a>
+                                        <a asp-controller="Account" asp-action="Login" asp-route-ReturnUrl="@Context.Request.Path.Value">Login</a>
                                     }
                                 </li>
                             </ul>

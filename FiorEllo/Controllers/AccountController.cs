@@ -103,8 +103,12 @@ namespace FiorEllo.Controllers
             {
                 await _signInManager.SignInAsync(user, true);
             }
+            if (ReturnUrl!=null)
+            {
+                return LocalRedirect(ReturnUrl);
+            }
 
-            return Redirect(ReturnUrl);
+            return RedirectToAction("Index", "Home");
         }
 
         public async Task<IActionResult> Logout()
