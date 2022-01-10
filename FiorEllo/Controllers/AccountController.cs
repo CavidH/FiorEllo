@@ -10,20 +10,22 @@ using Microsoft.Extensions.Logging;
 
 namespace FiorEllo.Controllers
 {
-     
     public class AccountController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
 
         private SignInManager<ApplicationUser> _signInManager;
+
+        private RoleManager<IdentityRole> _roleManager;
         // private ILogger<ApplicationUser> _logger ;
 
 
         public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
-            ILogger<ApplicationUser> logger)
+            ILogger<ApplicationUser> logger, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             // _logger = logger;
         }
 
@@ -35,7 +37,6 @@ namespace FiorEllo.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
         public async Task<IActionResult> Register(RegisterVM register)
         {
             if (!ModelState.IsValid) return View(register);
@@ -56,7 +57,7 @@ namespace FiorEllo.Controllers
 
                 return View(register);
             }
-            
+
             var Token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
             var ConfirmationLink = Url.Action("ConfirmEmail", "Account",
                 new {userId = newUser.Id, token = Token}, Request.Scheme);
@@ -76,7 +77,7 @@ namespace FiorEllo.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginVM login,string ReturnUrl)
+        public async Task<IActionResult> Login(LoginVM login, string ReturnUrl)
         {
             if (login == null) return BadRequest();
             var user = await _userManager.FindByEmailAsync(login.EMail);
@@ -103,7 +104,8 @@ namespace FiorEllo.Controllers
             {
                 await _signInManager.SignInAsync(user, true);
             }
-            if (ReturnUrl!=null)
+
+            if (ReturnUrl != null)
             {
                 return LocalRedirect(ReturnUrl);
             }
@@ -163,51 +165,69 @@ namespace FiorEllo.Controllers
                 ModelState.AddModelError(String.Empty, "Bele user movcud deyil");
                 return View();
             }
+
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var Resetlink = Url.Action("ResetPassword", "Account", new { token, email = user.Email }, Request.Scheme);
-            EmailHelper.EmailContentBuilder(resetVm.Email,Resetlink,"Reset Password","parolu sıfırlamaq üçün təstiq et buttonuna klik edin");
+            var Resetlink = Url.Action("ResetPassword", "Account", new {token, email = user.Email}, Request.Scheme);
+            EmailHelper.EmailContentBuilder(resetVm.Email, Resetlink, "Reset Password",
+                "parolu sıfırlamaq üçün təstiq et buttonuna klik edin");
             // return RedirectToAction("Index","Home");
             return Content("Please Check Your Email");
         }
+
         [AllowAnonymous]
-        public IActionResult ResetPassword( string token,string email)
+        public IActionResult ResetPassword(string token, string email)
         {
-            var model = new ResetPassword { Token = token, Email = email };
+            var model = new ResetPassword {Token = token, Email = email};
             return View(model);
-             
         }
+
         [HttpPost]
-        public  async Task<IActionResult>  ResetPassword( ResetPassword resetPassword)
+        public async Task<IActionResult> ResetPassword(ResetPassword resetPassword)
         {
             if (!ModelState.IsValid) return View(resetPassword);
- 
+
             var user = await _userManager.FindByEmailAsync(resetPassword.Email);
             if (user == null)
                 RedirectToAction("ResetPasswordConfirmation");
- 
-            var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Password);
+
+            var resetPassResult =
+                await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Password);
             if (!resetPassResult.Succeeded)
             {
                 foreach (var error in resetPassResult.Errors)
                     ModelState.AddModelError(error.Code, error.Description);
                 return View();
             }
- 
-            return RedirectToAction("ResetPasswordConfirmation","Account");
 
+            return RedirectToAction("ResetPasswordConfirmation", "Account");
         }
+
         [AllowAnonymous]
         public IActionResult ResetPasswordConfirmation()
         {
             return View();
         }
 
-        // private IActionResult CheckAuthenticated()
         // {
         //     if (User.Identity.IsAuthenticated)
         //     {
         //         return View();
         //     }
         // }
+
+        #region CreateRoll
+
+        public async Task CreateRoll()
+        {
+            foreach (var UserRole in Enum.GetValues(typeof(Helper.UserRoles)))
+            {
+                if (!await _roleManager.RoleExistsAsync(UserRole.ToString()))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole {Name = UserRole.ToString()});
+                }
+            }
+        }
+
+        #endregion
     }
 }

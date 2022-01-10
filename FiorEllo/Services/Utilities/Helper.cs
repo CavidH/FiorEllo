@@ -12,5 +12,12 @@ namespace FiorEllo.Services.Utilities
                 System.IO.File.Delete(path);
             }
         }
+        public  enum UserRoles
+        {
+            Admin,
+            Member,
+            Moderator
+            
+        }
     }
 }
